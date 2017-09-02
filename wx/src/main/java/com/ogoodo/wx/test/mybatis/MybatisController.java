@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.ogoodo.wx.test.mybatis.pojo.URole;
 import com.ogoodo.wx.test.mybatis.pojo.URoleExample;
 import com.ogoodo.wx.test.mybatis.service.MybatisService;
+import com.ogoodo.wx.test.mybatis.utils.PageTool;
 
 @Controller
 public class MybatisController {
@@ -89,8 +90,8 @@ public class MybatisController {
 			like = "%" + like + "%";
 			criteria.andNameLike(like); 	 
 		}  
-		// Map<String,Object> map = PageTool.select(mybatisService, example, pageNum, pageSize, "请求参数校验成功！@1@");
-        Map<String,Object> map=new HashMap<String,Object>();
+		Map<String,Object> map = PageTool.select(mybatisService, example, pageNum, pageSize, "请求参数校验成功！@1@");
+        // Map<String,Object> map=new HashMap<String,Object>();
         return map;
 	}
 
