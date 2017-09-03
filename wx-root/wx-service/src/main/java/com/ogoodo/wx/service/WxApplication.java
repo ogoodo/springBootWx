@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan("com.ogoodo.wx.test.mybatis.mapper")
+@MapperScan("com.ogoodo.wx.dao.test.mapper")
+//@MapperScan("com.ogoodo.wx.test.mybatis.mapper")
 //@MapperScan("com.ogoodo.wx.test.mybatis.dao")
 @ComponentScan(basePackages={"com.ogoodo","com.ogoodo.wx"})
 //@ComponentScan({"com.ogoodo.wx.*"})
