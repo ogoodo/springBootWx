@@ -19,11 +19,13 @@
             <groupId>com.ogoodo.wx.dao</groupId>
             <artifactId>wx-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope><!-- 编译需要而发布不需要的jar包 -->
         </dependency>
         
     </dependencies>
     
-<build>
+    <!-- 这个执行成功了 -->
+ 	<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -31,4 +33,15 @@
             </plugin>
         </plugins>
     </build>
+
+<!-- 	  <build>  
+	    <finalName>wx</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+	  </build> -->
+  
 </project>

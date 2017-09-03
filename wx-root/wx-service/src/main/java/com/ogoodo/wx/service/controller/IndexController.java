@@ -21,11 +21,12 @@ public class IndexController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		TestEntity entity2 = new TestEntity();
-		entity.setUssername("chenxb");
-		entity.setPassword("123456");
-
 		entity2.setUssername("chenxb2");
 		entity2.setPassword("1234562");
+		
+
+		entity.setUssername("chenxb");
+		entity.setPassword("123456");
 
 		map.put("code", "10001");
 		map.put("msg", "接口调用成功");

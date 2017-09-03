@@ -11,11 +11,8 @@
 	<name>wx-root</name>
 	<description>Demo project for Spring Boot</description>
 	
-	
-
 
 	<modules>
-		<module>wx-api</module>
 		<module>wx-dao</module>
 		<module>wx-service</module>
 	</modules>
