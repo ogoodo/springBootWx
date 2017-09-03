@@ -1,11 +1,14 @@
 package com.ogoodo.wx.dao.test.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ogoodo.wx.dao.test.pojo.URole;
 import com.ogoodo.wx.dao.test.pojo.URoleExample;
 
+@Mapper
 public interface URoleMapper {
 	
 	// 按条件计数

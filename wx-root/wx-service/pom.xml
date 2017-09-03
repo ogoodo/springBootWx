@@ -7,41 +7,74 @@
     <groupId>com.ogoodo.wx</groupId>
     <artifactId>wx-root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  
-  <groupId>com.ogoodo.wx.service</groupId>
+  <!-- 
+  <groupId>com.ogoodo.wx.service</groupId> -->
   <artifactId>wx-service</artifactId>
   <packaging>jar</packaging>
 
     <dependencies>
     
         <dependency>
-            <groupId>com.ogoodo.wx.dao</groupId>
+            <groupId>com.ogoodo.wx</groupId>
             <artifactId>wx-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope><!-- 编译需要而发布不需要的jar包 -->
+            <!-- <scope>provided</scope> --><!-- 编译需要而发布不需要的jar包 -->
         </dependency>
         
     </dependencies>
     
     <!-- 这个执行成功了 -->
- 	<build>
+<!--  	<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build> -->
 
-<!-- 	  <build>  
+<!--  	  <build>  
 	    <finalName>wx</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>spring-boot-maven-plugin</artifactId> 
             </plugin>
         </plugins>
 	  </build> -->
+  
+  
+    <build>
+    <finalName>wx</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.ogoodo.wx.service.WxApplication</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
+  
   
 </project>

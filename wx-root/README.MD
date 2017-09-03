@@ -8,7 +8,9 @@ wx-dao层  这里代码都用generator自动生成 主要提供实体类，CURD�
 wx-service层  一定要在wx-service和wx-service2配置数据库的相关信息，并添加spring的相关配置 
 
 
-
-
+打包jar包
+mvn package --D maven.test.skip=true
+运行jar包
+java -jar ./wx-service/target/wx.jar --server.port=9000
 
 

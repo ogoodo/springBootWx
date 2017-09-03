@@ -7,14 +7,14 @@
     <groupId>com.ogoodo.wx</groupId>
     <artifactId>wx-root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
- 
-  <groupId>com.ogoodo.wx.dao</groupId>
+ <!-- 
+  <groupId>com.ogoodo.wx.dao</groupId> -->
   <artifactId>wx-dao</artifactId>
-  <packaging>jar</packaging>
+  <!-- <packaging>jar</packaging> -->
   
     <build>
-    <!-- 一定要声明如下配置-->
         <resources>
             <resource>
                 <directory>src/main/java</directory>
