@@ -21,7 +21,8 @@
             		<!-- 这个必须有，否则打成jar包运行后, 调用mybatis报错 -->
                 <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>com/ogoodo/wx/test/dao/xml/*.xml</include>
+                    <!-- <include>**/*.xml</include> -->
                 </includes>
             </resource>
             <!-- <resource>
