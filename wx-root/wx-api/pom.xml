@@ -30,6 +30,13 @@
       <scope>test</scope>
     </dependency>
     
+    
+        <dependency>
+            <groupId>com.ogoodo.wx</groupId>
+            <artifactId>wx-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    
     <dependency>
         <groupId>com.ogoodo.wx</groupId>
         <artifactId>wx-dao</artifactId>
@@ -91,7 +98,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.ogoodo.wx.test.api.App</mainClass>
+          <mainClass>com.ogoodo.wx.test.api.main.App</mainClass>
         </configuration>
         <executions>
            <execution>

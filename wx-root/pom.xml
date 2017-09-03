@@ -12,10 +12,11 @@
 	
 
 	<modules>
+		<module>wx-utils</module>
 		<module>wx-dao</module>
 		<module>wx-service</module>
-        <module>wx-job</module>
-        <module>wx-api</module>
+		<module>wx-job</module>
+		<module>wx-api</module>
 	</modules>
 	
  
