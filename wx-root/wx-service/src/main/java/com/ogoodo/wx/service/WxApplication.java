@@ -1,4 +1,4 @@
-package com.ogoodo.wx;
+package com.ogoodo.wx.service;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

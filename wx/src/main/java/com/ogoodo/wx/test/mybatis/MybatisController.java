@@ -49,6 +49,7 @@ public class MybatisController {
 	}
 
 	/**
+	 * 这个用会出错， 不知道是不是和PageHelper冲突
 	 * http://localhost:8080/HelloSpringMVC/test/mybatis/page?page=1&count=10
 	 */
 	@ResponseBody
