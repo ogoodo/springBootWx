@@ -1,11 +1,11 @@
-package com.ogoodo.wx.service.service;
+package com.ogoodo.wx.test.service.service;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ogoodo.wx.dao.test.pojo.URole;
-import com.ogoodo.wx.dao.test.pojo.URoleExample;
+import com.ogoodo.wx.test.dao.pojo.URole;
+import com.ogoodo.wx.test.dao.pojo.URoleExample;
 
 
 public interface MybatisService {

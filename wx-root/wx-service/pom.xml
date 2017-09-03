@@ -53,26 +53,26 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.ogoodo.wx.service.WxApplication</mainClass>
+          <mainClass>com.ogoodo.wx.test.service.WxApplication</mainClass>
         </configuration>
       </plugin>
     </plugins>
     <resources>
-      <resource>
+<!--       <resource>
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.properties</include>
           <include>**/*.xml</include>
         </includes>
         <filtering>false</filtering>
-      </resource>
-      <resource>
+      </resource> -->
+<!--       <resource>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.*</include>
         </includes>
         <filtering>true</filtering>
-      </resource>
+      </resource> -->
     </resources>
   </build>
   

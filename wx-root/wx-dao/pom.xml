@@ -9,22 +9,24 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
- <!-- 
-  <groupId>com.ogoodo.wx.dao</groupId> -->
+
+
   <artifactId>wx-dao</artifactId>
   <!-- <packaging>jar</packaging> -->
+  
   
     <build>
         <resources>
             <resource>
+            		<!-- 这个必须有，否则打成jar包运行后, 调用mybatis报错 -->
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
             </resource>
-            <resource>
+            <!-- <resource>
                 <directory>src/main/resources</directory>
-            </resource>
+            </resource> -->
         </resources>
     </build>
  

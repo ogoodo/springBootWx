@@ -1,4 +1,4 @@
-package com.ogoodo.wx.service.controller;
+package com.ogoodo.wx.test.service.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
-import com.ogoodo.wx.dao.test.pojo.URole;
-import com.ogoodo.wx.dao.test.pojo.URoleExample;
-import com.ogoodo.wx.service.service.MybatisService;
-import com.ogoodo.wx.dao.test.utils.PageTool;
+import com.ogoodo.wx.test.dao.pojo.URole;
+import com.ogoodo.wx.test.dao.pojo.URoleExample;
+import com.ogoodo.wx.test.dao.utils.PageTool;
+import com.ogoodo.wx.test.service.service.MybatisService;
 
 @Controller
 public class MybatisController {

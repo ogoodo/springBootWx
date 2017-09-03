@@ -1,4 +1,4 @@
-package com.ogoodo.wx.service;
+package com.ogoodo.wx.test.service;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 //@EnableJpaRepositories("com.delivery.repository")
 
 @SpringBootApplication
-@MapperScan("com.ogoodo.wx.dao.test.mapper")
-@ComponentScan(basePackages={"com.ogoodo.wx.service","com.ogoodo.wx.dao.test"}) // 会自动扫描这个package下的注解
+@MapperScan("com.ogoodo.wx.test.dao.mapper")
+@ComponentScan(basePackages={"com.ogoodo.wx.test.service","com.ogoodo.wx.test.dao"}) // 会自动扫描这个package下的注解
 public class WxApplication {
 
 	public static void main(String[] args) {

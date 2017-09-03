@@ -1,12 +1,12 @@
-package com.ogoodo.wx.dao.test.mapper;
+package com.ogoodo.wx.test.dao.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ogoodo.wx.dao.test.pojo.URole;
-import com.ogoodo.wx.dao.test.pojo.URoleExample;
+import com.ogoodo.wx.test.dao.pojo.URole;
+import com.ogoodo.wx.test.dao.pojo.URoleExample;
 
 @Mapper
 public interface URoleMapper {

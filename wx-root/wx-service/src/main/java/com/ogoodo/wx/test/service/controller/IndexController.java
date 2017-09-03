@@ -1,4 +1,4 @@
-package com.ogoodo.wx.service.controller;
+package com.ogoodo.wx.test.service.controller;
 
 
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.ogoodo.wx.dao.test.TestEntity;
+//import com.ogoodo.wx.test.dao.TestEntity;
 
 @RestController
 public class IndexController {

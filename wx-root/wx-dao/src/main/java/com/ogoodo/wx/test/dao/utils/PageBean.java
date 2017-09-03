@@ -1,4 +1,4 @@
-package com.ogoodo.wx.dao.test.utils;
+package com.ogoodo.wx.test.dao.utils;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,13 +1,13 @@
-package com.ogoodo.wx.service.service;
+package com.ogoodo.wx.test.service.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ogoodo.wx.dao.test.mapper.URoleMapper;
-import com.ogoodo.wx.dao.test.pojo.URole;
-import com.ogoodo.wx.dao.test.pojo.URoleExample;
+import com.ogoodo.wx.test.dao.mapper.URoleMapper;
+import com.ogoodo.wx.test.dao.pojo.URole;
+import com.ogoodo.wx.test.dao.pojo.URoleExample;
 
 @Service("mybatisService")
 public class MybatisServiceImpl implements MybatisService{

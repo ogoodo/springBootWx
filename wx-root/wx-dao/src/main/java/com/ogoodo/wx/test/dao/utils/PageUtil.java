@@ -1,4 +1,4 @@
-package com.ogoodo.wx.dao.test.utils;
+package com.ogoodo.wx.test.dao.utils;
 
 //import java.lang.reflect.InvocationTargetException;
 //import java.lang.reflect.Method;

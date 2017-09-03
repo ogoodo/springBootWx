@@ -1,4 +1,4 @@
-package com.ogoodo.wx.dao.test.pojo;
+package com.ogoodo.wx.test.dao.pojo;
 
 
 import java.io.Serializable;
