@@ -12,21 +12,21 @@
   </parent>
 
 
-  <artifactId>wx-service</artifactId>
+  <artifactId>wx-job</artifactId>
 
 
-    <dependencies>
-    
-        <dependency>
-            <groupId>com.ogoodo.wx</groupId>
-            <artifactId>wx-dao</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <!-- <scope>provided</scope> --><!-- 编译需要而发布不需要的jar包 -->
-        </dependency>
-        
-    </dependencies>
-    
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
   
 </project>
-  
-  
