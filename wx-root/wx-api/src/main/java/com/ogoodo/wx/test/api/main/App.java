@@ -15,7 +15,12 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.ogoodo.wx.test.dao.mapper")
-@ComponentScan(basePackages={"com.ogoodo.wx.test.api.controller", "com.ogoodo.wx.test.service", "com.ogoodo.wx.test.dao"}) // 会自动扫描这个package下的注解
+@ComponentScan(basePackages={
+		"com.ogoodo.wx.test.api.controller",
+		"com.ogoodo.wx.shiro",
+		"com.ogoodo.wx.test.service",
+		"com.ogoodo.wx.test.dao"
+	}) // 会自动扫描这个package下的注解
 public class App 
 {
 	public static void main(String[] args) {
