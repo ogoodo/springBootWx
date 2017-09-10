@@ -32,6 +32,7 @@ public class MyRealm extends AuthorizingRealm {
      */
 	/**
 	 * 本函数其实就是shiro查询当前用户包含了哪些权限
+	 * 本例中该方法的调用时机为需授权资源被访问时
 	 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
@@ -67,6 +68,7 @@ public class MyRealm extends AuthorizingRealm {
         //详见applicationContext.xml中的<bean id="shiroFilter">的配置
         logger.info("----->用户"+ currentUsername + "具有的角色:" + simpleAuthorInfo.getRoles());
         logger.info("----->用户"+ currentUsername + "具有的权限：" + simpleAuthorInfo.getStringPermissions());
+        // 返回null的话，就会导致任何用户访问被拦截的请求时，都会自动跳转到unauthorizedUrl指定的地址
         return simpleAuthorInfo;
     }
 

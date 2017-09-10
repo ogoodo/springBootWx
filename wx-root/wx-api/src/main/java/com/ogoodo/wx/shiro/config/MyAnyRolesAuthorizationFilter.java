@@ -17,15 +17,17 @@ public class MyAnyRolesAuthorizationFilter extends AuthorizationFilter {
         Subject subject = getSubject(req, resp);    
         String[] rolesArray = (String[]) mappedValue;    
     
-        if (rolesArray == null || rolesArray.length == 0) { //没有角色限制，有权限访问    
+        // 没有角色限制，有权限访问 
+        if (rolesArray == null || rolesArray.length == 0) {   
             return true;    
-        }    
-        for (int i = 0; i < rolesArray.length; i++) {    
-            if (subject.hasRole(rolesArray[i])) { //若当前用户是rolesArray中的任何一个，则有权限访问    
-                return true;    
-            }    
-        }    
-    
+        }
+        
+        // 若当前用户是rolesArray中的任何一个，则有权限访问 
+        for(String role : rolesArray) {  
+            if(subject.hasRole(role)) {  
+                return true;  
+            }  
+        }
         return false;    
     }    
 } 

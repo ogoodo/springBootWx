@@ -36,6 +36,8 @@ import com.ogoodo.wx.test.dao.pojo.URole;
  * 参考: http://weiqingfei.iteye.com/blog/2307860
  * http://www.jianshu.com/p/05c8be17c80a  不知道是不是增加多组shiro验证, 不同路由走不通shiro bean
  * http://lihao312.iteye.com/blog/2309788 这个可以用
+ * http://www.cnblogs.com/hyyq/p/6886004.html  这个一个用户-角色-权限图不错, 登录过程可以参考
+ * http://blog.csdn.net/u014695188/article/details/52357379 讲验证码校验
  */
 @Controller
 public class ShiroController {
@@ -72,8 +74,8 @@ public class ShiroController {
 
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
-     * /test/shiro/login.do?username=admin&password=123456
-     * /test/shiro/login.do?username=user&password=123456
+     * /test/shiro/login.do?username=admin&password=123456&remember=false
+     * /test/shiro/login.do?username=user&password=123456&remember=false
      * 实际的登录代码
      * 如果登录成功，跳转至首页；登录失败，则将失败信息反馈对用户
      *
@@ -83,20 +85,20 @@ public class ShiroController {
      */
 	@ResponseBody
     @RequestMapping(value = "/test/shiro/login.do")
-    public Map<String,Object> shiroLogin(String username, String password, Model model) {
-    		// HttpRequest request,
-    		logger.debug("doLogin");
+    public Map<String,Object> shiroLogin(String username, String password, boolean remember, Model model) {
+
+    		logger.debug("用户登录:" + username);
         String msg = "";
-//        String userName = request.getParameter("userName");
-//        String password = request.getParameter("password");
-        // return msg;
-//        String userName = "chen";
-//        String password = "123456";
 
         Map<String,Object> map = new HashMap<String,Object>();
         
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        // token.setRememberMe(true);
+        if(remember) {
+    			logger.debug("------>" + username + "rememberme");
+            token.setRememberMe(true);
+        } else {
+			logger.debug("------>" + username + "not rememberme");
+        }
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -141,10 +143,12 @@ public class ShiroController {
             System.out.println(msg);
         } catch (AuthenticationException e) {
             msg = "密码不对！" + e.getMessage();
+            e.printStackTrace();
             model.addAttribute("message", msg);
         }
         map.put("code", "10004");
-        map.put("msg", "登录出错");
+        map.put("msg", msg);
+        map.put("data", "登录错误");
         return map;
     }
 
