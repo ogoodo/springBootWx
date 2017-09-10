@@ -1,11 +1,14 @@
 package com.ogoodo.wx.shiro.config;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.boot.autoconfigure.cache.CacheProperties.EhCache;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import javax.servlet.Filter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,23 +17,20 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 
-/**
- * 参考: http://weiqingfei.iteye.com/blog/2307860
- */
-@Configuration
+//@Configuration
 public class ShiroConfig {
 	@Bean
-	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
-		System.out.println("ShiroConfiguration.shirFilter()");
-		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-		shiroFilterFactoryBean.setSecurityManager( securityManager);
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+		System.out.println("ShiroConfiguration.shiroFilter()");
+		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
+		bean.setSecurityManager( securityManager);
 
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		shiroFilterFactoryBean.setLoginUrl("/wx/login");
+		bean.setLoginUrl("/wx/login");
 		// 登录成功后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/index");
+		bean.setSuccessUrl("/index");
 		//未授权界面;
-		shiroFilterFactoryBean.setUnauthorizedUrl("/wx/403");
+		bean.setUnauthorizedUrl("/wx/403");
 
 		//拦截器.
 //		Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
@@ -41,17 +41,41 @@ public class ShiroConfig {
 //		//<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
 //		//<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 //		filterChainDefinitionMap.put("/**", "authc");
+		Map<String, Filter>filters = new LinkedHashMap<>();
+		filters.put("perms", urlPermissionsFilter());
+		filters.put("anon", new AnonymousFilter());
+		bean.setFilters(filters);
+
+		org.apache.shiro.web.filter.authc.AuthenticationFilter aaa;
+
 		Map<String,String> filterChainDefinitionMap = this.builderFilterChainDefinitionMap();
-		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-//		shiroFilterFactoryBean.setFilters(filters);
-		return shiroFilterFactoryBean;
+		bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+		bean.setFilters(filters);
+		return bean;
 	}
+	@Bean
+	public URLPermissionsFilter urlPermissionsFilter() {
+		return new URLPermissionsFilter();
+	}
+//	  这种配置不方便
+//    @Bean  
+//    public FilterRegistrationBean filterDemo3Registration() {  
+//        FilterRegistrationBean registration = new FilterRegistrationBean();  
+//        registration.setFilter(new FilterMyAnyPermission());  
+//        registration.addUrlPatterns("/*");  
+//        registration.addInitParameter("paramName", "paramValue");  
+//        registration.setName("filterDemo3");  
+//        registration.setOrder(6);  
+//        return registration;  
+//    } 
+ 
 	// 这里可以从数据库里读出来
 	public LinkedHashMap<String, String> builderFilterChainDefinitionMap() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
 
 //		map.put("/test/shiro/anyPerms.jsp", "anyPerms[\"admin:delete\",\"admin:add\"]");
+		map.put("/test/shiro/self/perms", "perms");
 		
 		map.put("/test/shiro/list.jsp", "anon");
 		map.put("/test/shiro/login.do", "anon");
@@ -100,7 +124,8 @@ public class ShiroConfig {
     @Bean(name = "ehCacheManager")  
 //    @DependsOn("lifecycleBeanPostProcessor")  
     public EhCacheManager ehCacheManager(){  
-        EhCacheManager ehCacheManager = new EhCacheManager();  
+        EhCacheManager ehCacheManager = new EhCacheManager();
+//        ehCacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
         return ehCacheManager;  
     }
 
@@ -108,8 +133,10 @@ public class ShiroConfig {
 	public SecurityManager securityManager(){
 		DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
 		securityManager.setRealm(myShiroRealm());
-//		securityManager.setCacheManager(ehCacheManager()); 
+		securityManager.setCacheManager(ehCacheManager()); 
 		return securityManager;
 	}
+	
+
 }
 

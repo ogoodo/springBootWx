@@ -15,9 +15,14 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ogoodo.wx.shiro.test.ShiroController;
 
 public class MyRealm extends AuthorizingRealm {
-    // Log log = LogFactory.getLog(MyRealm.class);
+
+ 	private final static Logger logger = LoggerFactory.getLogger(MyRealm.class);
     /**
      * 为当前登录的Subject授予角色和权限
      * 经测试:本例中该方法的调用时机为需授权资源被访问时
@@ -30,7 +35,8 @@ public class MyRealm extends AuthorizingRealm {
 	 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
-        // log.info("-----------------access doGetAuthorizationInfo----------------------");
+
+        logger.info("权限配置-->doGetAuthorizationInfo");
         //获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()
         String currentUsername = (String)super.getAvailablePrincipal(principals);
 //      这里实现自己的业务逻辑
@@ -38,18 +44,29 @@ public class MyRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
         //实际中可能会像上面注释的那样从数据库取得
-        if(null!=currentUsername && "admin".equals(currentUsername)){
-            //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
-            simpleAuthorInfo.addRole("admin");         
-            simpleAuthorInfo.addStringPermission("admin:manage"); //添加权限return simpleAuthorInfo;
-        }
-        if(null!=currentUsername && "user".equals(currentUsername)){
-            //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
-            simpleAuthorInfo.addRole("user");         
-            simpleAuthorInfo.addStringPermission("user:manage"); //添加权限return simpleAuthorInfo;
+        if(null!= currentUsername) {
+	        if("admin".equals(currentUsername) || "su".equals(currentUsername)){
+	            //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
+	            simpleAuthorInfo.addRole("admin");
+	            simpleAuthorInfo.addStringPermission("admin:manage");
+	            simpleAuthorInfo.addStringPermission("admin:delete");
+	            simpleAuthorInfo.addStringPermission("admin:add");
+	        }
+	        //超级管理员
+	        if("su".equals(currentUsername)){
+	            simpleAuthorInfo.addRole("su");
+	            simpleAuthorInfo.addStringPermission("admin:super");
+	        }
+	        if("user".equals(currentUsername)){
+	            //添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
+	            simpleAuthorInfo.addRole("user");         
+	            simpleAuthorInfo.addStringPermission("user:manage"); //添加权限return simpleAuthorInfo;
+	        }
         }
         //若该方法什么都不做直接返回null的话,就会导致任何用户访问/admin/listUser.jsp时都会自动跳转到unauthorizedUrl指定的地址
         //详见applicationContext.xml中的<bean id="shiroFilter">的配置
+        logger.info("----->用户"+ currentUsername + "具有的角色:" + simpleAuthorInfo.getRoles());
+        logger.info("----->用户"+ currentUsername + "具有的权限：" + simpleAuthorInfo.getStringPermissions());
         return simpleAuthorInfo;
     }
 
@@ -64,21 +81,29 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {//获取基于用户名和密码的令牌
-    	UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
-    	token.getUsername();
-    	String userId= (String) authcToken.getPrincipal();
-    	System.out.println(userId);
-    	//模拟从数据库取得的信息
-    	String password="123456";
-    	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
-    	// MD5盐值加密生成复杂密码
-    	Object saltPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(userId), 1024);
 
-    	ByteSource credSalt = ByteSource.Util.bytes(userId);
-    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, saltPassword, credSalt, getName());
-    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
-    	
-    	return info;
+        logger.info("正在验证身份...");
+	    	UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
+	    String username= token.getUsername();
+	    if(!username.equals("admin") && !username.equals("user") && !username.equals("test")) {
+	        logger.info("----->用户:" + username + "没有登录权限");
+	    		return null;
+	    } else {
+	        logger.info("----->用户:" + username + "存在");
+	    }
+	    	String userId= (String) authcToken.getPrincipal();
+	    logger.info("----->userId:" + userId);
+	    	//模拟从数据库取得的信息
+	    	String password="123456";
+	    	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
+	    	// MD5盐值加密生成复杂密码
+	    	Object saltPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(userId), 1024);
+	
+	    	ByteSource credSalt = ByteSource.Util.bytes(userId);
+	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, saltPassword, credSalt, getName());
+	    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
+	    	
+	    	return info;
 
 
 //        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的

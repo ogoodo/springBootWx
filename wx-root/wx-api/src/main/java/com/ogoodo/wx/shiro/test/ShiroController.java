@@ -31,6 +31,12 @@ import com.ogoodo.wx.test.dao.pojo.URole;
 
 //import com.ogoodo.springmvc.HelloWorldController;
 
+// 
+/**
+ * 参考: http://weiqingfei.iteye.com/blog/2307860
+ * http://www.jianshu.com/p/05c8be17c80a  不知道是不是增加多组shiro验证, 不同路由走不通shiro bean
+ * http://lihao312.iteye.com/blog/2309788 这个可以用
+ */
 @Controller
 public class ShiroController {
 
@@ -66,7 +72,8 @@ public class ShiroController {
 
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
-     * /test/shiro/login.do?username=chen&password=123456
+     * /test/shiro/login.do?username=admin&password=123456
+     * /test/shiro/login.do?username=user&password=123456
      * 实际的登录代码
      * 如果登录成功，跳转至首页；登录失败，则将失败信息反馈对用户
      *
@@ -140,6 +147,42 @@ public class ShiroController {
         map.put("msg", "登录出错");
         return map;
     }
+
+	// 用户未有权限
+    	@ResponseBody
+    	@RequestMapping(value="/test/shiro/unauthor.do")
+    	public Map<String,Object> unauthor( Locale locale){
+    	    Map<String,Object> map=new HashMap<String,Object>();
+    	    map.put("code", "10001");
+    	    map.put("msg", "未有此权限");
+    	    return map;
+    	}
+
+	@ResponseBody
+	@RequestMapping(value="/test/shiro/custom/perms.do")
+	public Map<String,Object> customPerms( Locale locale){
+	    Map<String,Object> map=new HashMap<String,Object>();
+	    map.put("code", "10000");
+	    map.put("msg", "自定义校验perms");
+	    return map;
+	}
+
+
+	@ResponseBody
+	@RequestMapping(value="/test/shiro/custom/anyPerms.do")
+	public Map<String,Object> customAnyPerms( Locale locale){
+	    Map<String,Object> map=new HashMap<String,Object>();
+	    map.put("code", "10000");
+	    map.put("msg", "自定义校验anyPerms");
+	    return map;
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/test/shiro/custom/anyRoles.do")
+	public Map<String,Object> customAnyRoles( Locale locale){
+	    Map<String,Object> map=new HashMap<String,Object>();
+	    map.put("code", "10000");
+	    map.put("msg", "自定义校验anyRoles");
+	    return map;
+	}
 }
-
-
