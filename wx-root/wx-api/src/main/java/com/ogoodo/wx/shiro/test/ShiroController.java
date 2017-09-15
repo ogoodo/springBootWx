@@ -22,12 +22,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ogoodo.wx.shiro.config.MyRealm;
 import com.ogoodo.wx.shiro.config.MyShiroService;
-import com.ogoodo.wx.test.dao.pojo.URole;
 
 //import com.ogoodo.springmvc.HelloWorldController;
 
@@ -42,7 +41,7 @@ import com.ogoodo.wx.test.dao.pojo.URole;
 @Controller
 public class ShiroController {
 
-	private static Logger logger = LoggerFactory.getLogger(ShiroController.class);
+ 	private final static Logger logger = LoggerFactory.getLogger(ShiroController.class);
 
 	@Autowired
 	private MyShiroService myShiroService;
@@ -59,11 +58,37 @@ public class ShiroController {
 
 	@ResponseBody
 	@RequestMapping(value = "/test/shiro/annotation.do")
-	public String shiroAnnotation(HttpSession session) {
+	public Map<String,Object> shiroAnnotation(HttpSession session) {
 		session.setAttribute("key", "value123");
-		myShiroService.testMethod();
-		return "redirect:/test/shiro/list.jsp";
+		Object value = myShiroService.testMethod();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code", "10000");
+        map.put("msg", "测试通过session传值");
+        map.put("sessionValue", value);
+        return map;
+//		return "redirect:/test/shiro/list.jsp";
 	}
+
+
+	/**
+	 * /test/shiro/sessionTransferValue.do?value=我传入的值123
+	 * 测试用session传值给service
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/test/shiro/sessionTransferValue.do")
+	public Map<String,Object> sessionTransferValue(String value, HttpSession session) {
+		session.setAttribute("myKey", value);
+		Object sessionTransferValue = myShiroService.testSessionTransferValue();
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code", "10000");
+        map.put("msg", "测试通过session传值");
+        map.put("sessionTransferValue", sessionTransferValue);
+        return map;
+//		return "redirect:/test/shiro/list.jsp";
+	}
+	
 
    @RequestMapping(value = "/test/shiro/logout.do")
    public String logout() {
@@ -87,17 +112,17 @@ public class ShiroController {
     @RequestMapping(value = "/test/shiro/login.do")
     public Map<String,Object> shiroLogin(String username, String password, boolean remember, Model model) {
 
-    		logger.debug("用户登录:" + username);
+    		logger.info("用户登录:" + username + " " + password);
         String msg = "";
 
         Map<String,Object> map = new HashMap<String,Object>();
         
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         if(remember) {
-    			logger.debug("------>" + username + "rememberme");
+    			logger.info("------>" + username + "  rememberme");
             token.setRememberMe(true);
         } else {
-			logger.debug("------>" + username + "not rememberme");
+			logger.info("------>" + username + "  not rememberme");
         }
         Subject subject = SecurityUtils.getSubject();
         try {
@@ -108,8 +133,9 @@ public class ShiroController {
                 return map;
 //                return "redirect:./list.jsp";
             } else {
-                map.put("code", "10004");
+                map.put("code", "10005");
                 map.put("msg", "登录失败");
+                map.put("data", subject.toString());
                 return map;
 //                return "login";
             }

@@ -3,8 +3,6 @@ package com.ogoodo.wx.shiro.config;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyHashedCredentialsMatcher  extends HashedCredentialsMatcher {
 	

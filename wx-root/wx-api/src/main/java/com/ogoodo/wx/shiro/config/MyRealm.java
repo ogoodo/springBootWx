@@ -18,8 +18,6 @@ import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ogoodo.wx.shiro.test.ShiroController;
-
 public class MyRealm extends AuthorizingRealm {
 
  	private final static Logger logger = LoggerFactory.getLogger(MyRealm.class);

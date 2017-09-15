@@ -2,7 +2,6 @@ package com.ogoodo.wx.shiro.config;
 
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.EhCache;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 import javax.servlet.DispatcherType;
@@ -23,9 +21,7 @@ import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.mgt.SecurityManager;
 
 
 @Configuration
@@ -34,16 +30,25 @@ public class ShiroConfigMy {
      * FilterRegistrationBean 
      * @return 
      */  
-    @Bean  
-    public FilterRegistrationBean filterRegistrationBean() {  
-        FilterRegistrationBean filterRegistration = new FilterRegistrationBean();  
-        filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));   
-        filterRegistration.setEnabled(true);  
-        filterRegistration.addUrlPatterns("/*");   
-        filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);  
-        return filterRegistration;  
-    }  
-  
+//    @Bean  
+//    public FilterRegistrationBean filterRegistrationBean() {  
+//        FilterRegistrationBean filterRegistration = new FilterRegistrationBean();  
+//        filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));   
+//        filterRegistration.setEnabled(true);  
+//        filterRegistration.addUrlPatterns("/*");   
+//        filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);  
+//        return filterRegistration;  
+//    }  
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+        proxy.setTargetFilterLifecycle(true);
+        proxy.setTargetBeanName("shiroFilter");
+        filterRegistrationBean.setFilter(proxy);
+        return filterRegistrationBean;
+    }
+
     /**  
      * @see org.apache.shiro.spring.web.ShiroFilterFactoryBean  
      * @return  

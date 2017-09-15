@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 public class MyShiroService {
 
 	@RequiresRoles({"admin"})
-	public void testMethod() {
+	public Object testMethod() {
 		System.out.println("testMethod");
-		Session session = SecurityUtils.getSubject().getSession();
-		Object value = session.getAttribute("key");
-		System.out.println("MyShiroService.testMethod: " + value);
+		return "验证@RequiresRoles注解, admin_permission_success";
 	}
 
+	public Object testSessionTransferValue() {
+		System.out.println("testSessionTransferValue");
+		Session session = SecurityUtils.getSubject().getSession();
+		Object value = session.getAttribute("myKey");
+		System.out.println("MyShiroService.testMethod: " + value);
+		return value;
+	}
+	
 }
 

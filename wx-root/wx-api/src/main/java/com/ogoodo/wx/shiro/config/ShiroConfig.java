@@ -4,10 +4,6 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.EhCache;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import javax.servlet.Filter;
 
 import java.util.LinkedHashMap;
@@ -46,7 +42,7 @@ public class ShiroConfig {
 		filters.put("anon", new AnonymousFilter());
 		bean.setFilters(filters);
 
-		org.apache.shiro.web.filter.authc.AuthenticationFilter aaa;
+//		org.apache.shiro.web.filter.authc.AuthenticationFilter aaa;
 
 		Map<String,String> filterChainDefinitionMap = this.builderFilterChainDefinitionMap();
 		bean.setFilterChainDefinitionMap(filterChainDefinitionMap);

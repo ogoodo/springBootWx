@@ -2,8 +2,6 @@ package com.ogoodo.wx.shiro.config;
 
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -25,8 +22,8 @@ public class URLPermissionsFilter extends PermissionsAuthorizationFilter{
 	public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
 		String curUrl = getRequestUrl(request);
         Subject subject = getSubject(request, response);
-        boolean b = subject.isAuthenticated();
-		Subject subject2 = SecurityUtils.getSubject();
+//        boolean b = subject.isAuthenticated();
+//		Subject subject2 = SecurityUtils.getSubject();
 		Object obj = subject.getPrincipal();
 		if( obj == null 
 				|| StringUtils.endsWithAny(curUrl, ".js",".css",".html")
