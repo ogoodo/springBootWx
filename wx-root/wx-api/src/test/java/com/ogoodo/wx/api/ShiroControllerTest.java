@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import javax.annotation.Resource;
@@ -129,15 +130,22 @@ public class ShiroControllerTest {
 		json.put("remember", "false");
 		String jsonstr = json.toString() ;
 		String url = "/test/shiro/login.do";
-		RequestBuilder request = MockMvcRequestBuilders.post(url)
+		RequestBuilder request = MockMvcRequestBuilders
+		.post(url)
+		.content(jsonstr)
 		.contentType(MediaType.APPLICATION_JSON_UTF8)
-	//	.header("SESSIONNO", "");
-		.content(jsonstr);
+		.accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+	//	.header("SESSIONNO", "")
+		;
 
         MvcResult mvcResult = mvc.perform(request)
 //        	    .andExpect(MockMvcResultMatchers.status().isOk())
         	    .andDo(MockMvcResultHandlers.print())
-        		.andReturn();
+        	    .andExpect(status().isOk())  
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))  
+            .andExpect(jsonPath("$.code").value(10000))
+        		.andReturn()
+        		;
 
         int status = mvcResult.getResponse().getStatus();  
         String content = mvcResult.getResponse().getContentAsString();

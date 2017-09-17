@@ -34,6 +34,8 @@ import com.ogoodo.wx.shiro.config.MyShiroService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;  
+import io.swagger.annotations.ApiResponses; 
 
 //import com.ogoodo.springmvc.HelloWorldController;
 
@@ -108,15 +110,13 @@ public class ShiroController {
    
    @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
-
- /**
-{
-username:"admin",
-password:"123456",
-remember: true
-}
-  */
-//	@ResponseBody
+   @ApiResponses(value = {  
+	        @ApiResponse(code = 200, message = "成功"),  
+	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),  
+	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),  
+	        @ApiResponse(code = 404, message = "接口不存在")  
+		}  
+	)
   @RequestMapping(value = "/test/shiro/login.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
   public Map<String,Object> shiroLogin(
   		@RequestBody User user, Model model) {
