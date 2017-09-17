@@ -12,6 +12,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
@@ -23,7 +24,7 @@ import java.util.Map;
 
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 
-
+@Component
 @Configuration
 public class ShiroConfigMy {
 	 /** 
@@ -86,6 +87,7 @@ public class ShiroConfigMy {
 		
 		map.put("/test/shiro/list.jsp", "anon");
 		map.put("/test/shiro/login.do", "anon");
+		map.put("/test/shiro/login2.do", "anon");
 		map.put("/test/shiro/login.jsp", "anon");
 		// map.put("/test/shiro/logout.do", "logout");
 //		map.put("/test/shiro/user.jsp", "anyRoles[\"user,admin\"]");

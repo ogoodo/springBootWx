@@ -1,4 +1,4 @@
-package com.ogoodo.wx.shiro.test;
+package com.ogoodo.wx.shiro.test.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -22,11 +22,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ogoodo.wx.shiro.config.MyRealm;
 import com.ogoodo.wx.shiro.config.MyShiroService;
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 
 //import com.ogoodo.springmvc.HelloWorldController;
 
@@ -38,7 +45,8 @@ import com.ogoodo.wx.shiro.config.MyShiroService;
  * http://www.cnblogs.com/hyyq/p/6886004.html  这个一个用户-角色-权限图不错, 登录过程可以参考
  * http://blog.csdn.net/u014695188/article/details/52357379 讲验证码校验
  */
-@Controller
+//@Controller
+@RestController
 public class ShiroController {
 
  	private final static Logger logger = LoggerFactory.getLogger(ShiroController.class);
@@ -97,6 +105,25 @@ public class ShiroController {
 	   return "redirect:/test/shiro/login.jsp";
    }
 
+   
+   @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
+   @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
+
+ /**
+{
+username:"admin",
+password:"123456",
+remember: true
+}
+  */
+//	@ResponseBody
+  @RequestMapping(value = "/test/shiro/login.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+  public Map<String,Object> shiroLogin(
+  		@RequestBody User user, Model model) {
+	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
+   }
+   
+   
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
      * /test/shiro/login.do?username=admin&password=123456&remember=false
@@ -108,9 +135,26 @@ public class ShiroController {
      * @param model
      * @return
      */
-	@ResponseBody
-    @RequestMapping(value = "/test/shiro/login.do")
-    public Map<String,Object> shiroLogin(String username, String password, boolean remember, Model model) {
+   @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
+//   @ApiOperation(value="login api", notes="notes", consumes="application/x-www-form-urlencoded")
+   @ApiImplicitParams({
+       @ApiImplicitParam(name = "username", value = "admin", required = true, dataType = "String"),
+       @ApiImplicitParam(name = "password", value = "123456", required = true, dataType = "String")
+   })
+   /**
+{
+username:"admin"
+password:"123456"
+}
+    */
+//	@ResponseBody
+    @RequestMapping(value = "/test/shiro/login2.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    public Map<String,Object> shiroLogin2(
+//    		@RequestBody String username,
+//    		@RequestBody String password,
+    		String username,
+    		String password,
+    		boolean remember, Model model) {
 
     		logger.info("用户登录:" + username + " " + password);
         String msg = "";

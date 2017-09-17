@@ -1,4 +1,5 @@
-package com.ogoodo.wx.test.api.controller;
+package com.ogoodo.wx.shiro.test.controller;
+
 
 
 import java.util.HashMap;
@@ -7,18 +8,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ogoodo.wx.test.dao.pojo.TestEntity;
 
 @RestController
-public class IndexController {
+public class TestShiroController {
 
 	@Autowired
 	TestEntity entity = new TestEntity();
 
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	@RequestMapping(value="/test")
 	public Map<String, Object> index() {
 		Map<String, Object> map = new HashMap<String, Object>();
 
