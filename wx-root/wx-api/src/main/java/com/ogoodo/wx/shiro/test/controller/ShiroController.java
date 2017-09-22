@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,11 +102,14 @@ public class ShiroController {
 	}
 	
 
-   @RequestMapping(value = "/test/shiro/logout.do")
-   public String logout() {
+   @GetMapping(value = "/test/shiro/logout.do")
+   public Map<String,Object> logout() {
 	   Subject subject = SecurityUtils.getSubject();  
 	   subject.logout(); 
-	   return "redirect:/test/shiro/login.jsp";
+       Map<String,Object> map=new HashMap<String,Object>();
+       map.put("code", "10000");
+       map.put("msg", "退出成功");
+       return map;
    }
 
    
@@ -117,7 +122,7 @@ public class ShiroController {
 	        @ApiResponse(code = 404, message = "接口不存在")  
 		}  
 	)
-  @RequestMapping(value = "/test/shiro/login.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+  @PostMapping(value = "/test/shiro/login.do", produces = {"application/json;charset=utf-8"})
   public Map<String,Object> shiroLogin(
   		@RequestBody User user, Model model) {
 	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);

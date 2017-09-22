@@ -10,9 +10,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import javax.annotation.Resource;
 
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.util.ThreadContext;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +35,8 @@ public class ShiroControllerTest {
     private MockMvc mvc;
 //    @Autowired
 //    private ShiroConfigMy cfg;// = new com.ogoodo.wx.shiro.config.ShiroConfigMy();
-    private ShiroConfigMy cfg = new ShiroConfigMy();
+    private ShiroConfigMy cfg;
+//    private ShiroConfigMy cfg = new ShiroConfigMy();
 //    @Resource
 //    org.apache.shiro.mgt.SecurityManager securityManager;
 //  @Autowired
@@ -43,11 +46,34 @@ public class ShiroControllerTest {
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(new ShiroController()).build();
 //		SecurityManager securityManger = mock(SecurityManager.class, RETURNS_DEEP_STUBS);
-	    ThreadContext.bind(cfg.securityManager());
+        if(this.cfg == null) {
+            this.cfg = new ShiroConfigMy();
+    	    		ThreadContext.bind(cfg.securityManager());
+        }
 //        SecurityManager securityManager = (SecurityManager)appCtx.getBean("securityManager");
 //        SecurityUtils.setSecurityManager(securityManager);
     }
- 
+
+    @After
+    public void destroy() {
+//    		this.cfg
+    	LifecycleUtils.destroy(this.cfg);
+    		// ThreadContext.getSecurityManager();
+//    		ThreadContext.unbindSecurityManager();
+//    		ThreadContext.remove();
+//        MyCustomCacheManager customCacheManager = (MyCustomCacheManager) context.getBean("yourCustomCacheManagerBean");
+//
+//        try {
+//            net.sf.ehcache.Cache cache = customCacheManager.getCache();
+//            net.sf.ehcache.CacheManager cacheManager = cache.getCacheManager();
+//            cacheManager.removeCache("nameOfYourCache");
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//
+//        context.destroy();
+//        context = null;
+    }
     //验证controller是否正常响应并打印返回结果
 //    @Test
 //    public void getHello() throws Exception {
@@ -76,13 +102,13 @@ public class ShiroControllerTest {
 		String jsonstr = json.toString() ;
 		System.out.println("================================请求入参："+jsonstr);
 		String url = "/test/shiro/login.do";
-		mvc.perform(MockMvcRequestBuilders.post(url)
-	       .contentType(MediaType.APPLICATION_JSON_UTF8)
-	       .content(jsonstr)
-	       .accept(MediaType.APPLICATION_JSON))
-	       .andExpect(MockMvcResultMatchers.status().isOk())
-	       .andDo(MockMvcResultHandlers.print())
-	       .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("登录成功")));
+//		mvc.perform(MockMvcRequestBuilders.post(url)
+//	       .contentType(MediaType.APPLICATION_JSON_UTF8)
+//	       .content(jsonstr)
+//	       .accept(MediaType.APPLICATION_JSON))
+//	       .andExpect(MockMvcResultMatchers.status().isOk())
+//	       .andDo(MockMvcResultHandlers.print())
+//	       .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("登录成功")));
 	}
 	
 //	@Test
@@ -123,7 +149,7 @@ public class ShiroControllerTest {
 //	}
 
 	@Test
-	public void testPost() throws Exception {
+	public void login() throws Exception {
 		JSONObject json = new JSONObject() ;
 		json.put("username", "admin");
 		json.put("password", "123456");
@@ -131,15 +157,14 @@ public class ShiroControllerTest {
 		String jsonstr = json.toString() ;
 		String url = "/test/shiro/login.do";
 		RequestBuilder request = MockMvcRequestBuilders
-		.post(url)
-		.content(jsonstr)
-		.contentType(MediaType.APPLICATION_JSON_UTF8)
-		.accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
-	//	.header("SESSIONNO", "")
-		;
+			.post(url)
+			.content(jsonstr)
+			.contentType(MediaType.APPLICATION_JSON_UTF8)
+			.accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+			;
 
         MvcResult mvcResult = mvc.perform(request)
-//        	    .andExpect(MockMvcResultMatchers.status().isOk())
+        		// .andExpect(MockMvcResultMatchers.status().isOk())
         	    .andDo(MockMvcResultHandlers.print())
         	    .andExpect(status().isOk())  
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))  
@@ -162,6 +187,40 @@ public class ShiroControllerTest {
         
         Assert.assertTrue("正确", status == 200);  
         Assert.assertFalse("错误", status != 200);  
+//        this.logout();
 	}
 
+	 @Test
+	public void logout() throws Exception {
+		String url = "/test/shiro/logout.do";
+		RequestBuilder request = MockMvcRequestBuilders
+			.get(url)
+			.contentType(MediaType.APPLICATION_JSON_UTF8)
+			.accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
+			;
+
+        MvcResult mvcResult = mvc.perform(request)
+        		// .andExpect(MockMvcResultMatchers.status().isOk())
+        	    .andDo(MockMvcResultHandlers.print())
+        	    .andExpect(status().isOk())  
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))  
+            .andExpect(jsonPath("$.code").value(10000))
+        		.andReturn()
+        		;
+
+        int status = mvcResult.getResponse().getStatus();  
+        String content = mvcResult.getResponse().getContentAsString();
+
+
+		System.out.println("================================");
+		System.out.println("url: " + url);
+		
+		System.out.println("请求入参:");
+
+        System.out.println("返回结果:");
+        System.out.println(content);
+        
+        Assert.assertTrue("正确", status == 200);  
+        Assert.assertFalse("错误", status != 200);  
+	}
 }

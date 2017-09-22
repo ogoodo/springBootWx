@@ -13,16 +13,22 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+//import org.springframework.util.LinkedMultiValueMap;
+//import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ogoodo.wx.shiro.test.controller.User;
 import com.ogoodo.wx.test.api.main.App;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -35,37 +41,48 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class ShiroTest {
 
-    private String dateReg;
-    private Pattern pattern;
+//    private String dateReg;
+//    private Pattern pattern;
 //    private TestRestTemplate template = new TestRestTemplate();
     @Autowired
     private TestRestTemplate restTemplate;
 //    @Value("${local.server.port}")// 注入端口号
     private int port=8011;
 
-    @Test
-    public void test3(){
-        String url = "http://localhost:"+port+"/test/shiro/login.do?username=admin&password=123456&remember=true";
-//        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
-//        map.add("name", "Tom");  
-//        map.add("name1", "Lily");
-        String result = restTemplate.getForObject(url, String.class);
-        System.out.println(result);
-        assertNotNull(result);
-        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
-    }
+//    @Test
+//    public void test3(){
+//        String url = "http://localhost:"+port+"/test/shiro/login2.do?username=admin&password=123456&remember=true";
+////        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
+////        map.add("name", "Tom");  
+////        map.add("name1", "Lily");
+//        String result = restTemplate.getForObject(url, String.class);
+//        System.out.println(result);
+//        assertNotNull(result);
+//        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
+//    }
 
+//    HttpEntity<String> getContent(String content) {
+//        HttpHeaders headers = new HttpHeaders();
+//        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+//        headers.setContentType(type);
+//        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+//
+//        HttpEntity<String> formEntity = new HttpEntity<String>(content, headers);
+//    		return formEntity;
+//    	}
     @Test
-    public void test4(){
-        String url = "http://localhost:"+port+"/test/shiro/login.do";
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>(); 
-        map.add("username", "user");  
-        map.add("password", "123456");
-        map.add("remember", "false");
-        String result = restTemplate.postForObject(url, map, String.class);
-        System.out.println(result);
-        assertNotNull(result);
-        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
+    public void test4() throws JsonProcessingException{
+    		User user = new User();
+    		user.setUsername("admin");
+    		user.setPassword("123456");
+    		user.setRemember(true);
+    		ObjectMapper mapper = new ObjectMapper();
+//        HttpEntity<String> formEntity = this.getContent(mapper.writeValueAsString(user));
+//        String url = "http://localhost:"+port+"/test/shiro/login.do";
+//        String result = restTemplate.postForObject(url, formEntity, String.class);
+//        System.out.println(result);
+//        assertNotNull(result);
+//        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
     }
 
     @Test
@@ -75,20 +92,20 @@ public class ShiroTest {
 //        assertEquals("中文测试", book.getPublisher().getName());
     }
 
-    @Test  
-    public void testMain() {  
-        fail("Not yet implemented");  
-    }  
-  
-    @Test  
-    public void testTest() {  
-        System.out.println("@Test");//调用自己要测试的方法  
-    } 
+//    @Test  
+//    public void testMain() {  
+//        fail("Not yet implemented");  
+//    }  
+//  
+//    @Test  
+//    public void testTest() {  
+//        System.out.println("@Test");//调用自己要测试的方法  
+//    } 
     
-    @Test  
-    public void testAssert() {  
-        assertEquals("chenleixing","chenlei");  
-    }  
+//    @Test  
+//    public void testAssert() {  
+//        assertEquals("chenleixing","chenlei");  
+//    }  
       
 //    @Test(timeout=1)  
 //    public void testTimeout() {  

@@ -18,7 +18,7 @@ public class IndexController {
 	@Autowired
 	TestEntity entity = new TestEntity();
 
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	@RequestMapping(value="/index-test", method=RequestMethod.GET)
 	public Map<String, Object> index() {
 		Map<String, Object> map = new HashMap<String, Object>();
 

@@ -24,7 +24,7 @@ import java.util.Map;
 
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 
-@Component
+//@Component
 @Configuration
 public class ShiroConfigMy {
 	 /** 
@@ -89,6 +89,7 @@ public class ShiroConfigMy {
 		map.put("/test/shiro/login.do", "anon");
 		map.put("/test/shiro/login2.do", "anon");
 		map.put("/test/shiro/login.jsp", "anon");
+		map.put("/static", "anon");
 		// map.put("/test/shiro/logout.do", "logout");
 //		map.put("/test/shiro/user.jsp", "anyRoles[\"user,admin\"]");
 //		map.put("/test/shiro/user.jsp", "roles[admin]");

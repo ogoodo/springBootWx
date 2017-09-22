@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+//import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -86,7 +87,7 @@ public class MybatisController {
 //		Map<String,Object> map = PageUtil.Change(list2, "请求参数校验成功！@@");
 
 		URoleExample example = new URoleExample();
-		if(StringUtils.hasText(like)){
+		if(StringUtils.isNotBlank(like)){
 			URoleExample.Criteria criteria = example.createCriteria();  
 			like = "%" + like + "%";
 			criteria.andNameLike(like); 	 
@@ -107,7 +108,7 @@ public class MybatisController {
 		try {
 			URole role = new URole();
 			role.setName(name);
-			if(StringUtils.hasText(type)) {
+			if(StringUtils.isNotBlank(type)) {
 				role.setType(type);
 			}
 			long insertCount = mybatisService.insert(role);
@@ -176,7 +177,7 @@ public class MybatisController {
         Map<String,Object> map=new HashMap<String,Object>();
     		try {
     			URoleExample example = new URoleExample();
-    			if(StringUtils.hasText(like)){
+    			if(StringUtils.isNotBlank(like)){
     				URoleExample.Criteria criteria = example.createCriteria();  
     				like = "%" + like + "%";
     				criteria.andNameLike(like); 	 
@@ -202,7 +203,7 @@ public class MybatisController {
         Map<String,Object> map=new HashMap<String,Object>();
 		try {
     			URoleExample example = new URoleExample();
-    			if(StringUtils.hasText(like)){
+    			if(StringUtils.isNotBlank(like)){
     				URoleExample.Criteria criteria = example.createCriteria();
     				like = "%" + like + "%";
     				criteria.andNameLike(like);

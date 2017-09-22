@@ -14,18 +14,18 @@ import com.ogoodo.wx.test.api.main.App;
   
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = App.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+//@ContextConfiguration(classes = App.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 //@SpringApplicationConfiguration(classes = Application.class)// 1.4.0 前版本  
 public class JdbcTest {  
-       
-	@Autowired  
-	private MyShiroService userRepository;  
+
+	@Autowired
+	private MyShiroService myShiroService;
 	
 	@Test  
 	public void findAllUsers() {  
-		System.out.println(userRepository.testMethod());  
+		System.out.println(myShiroService.testMethod());  
 	}  
   
 //        @Test  
