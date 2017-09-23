@@ -21,3 +21,14 @@ wx-root >   mvn clean package                             // 直接打包
 wx-root >   java -jar ./wx-api/target/wx.jar --server.port=8018
 
 
+tool_____________________________________________
+
+### tools
+参考: https://github.com/astarring/mybatis-generator-gui
+cd ~/Documents/tools/mybatis-generator-gui-0.8.4/target/jfx/app/
+java -jar mybatis-generator-gui.jar
+
+
+
+
+
