@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ogoodo.wx.test.dao.pojo.URole;
-import com.ogoodo.wx.test.dao.pojo.URoleExample;
+import com.ogoodo.wx.db.dao.URole;
+import com.ogoodo.wx.db.dao.URoleExample;
+
 
 
 public interface MybatisService {

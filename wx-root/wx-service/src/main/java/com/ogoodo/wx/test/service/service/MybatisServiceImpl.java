@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ogoodo.wx.test.dao.mapper.URoleMapper;
-import com.ogoodo.wx.test.dao.pojo.URole;
-import com.ogoodo.wx.test.dao.pojo.URoleExample;
+import com.ogoodo.wx.db.dao.URole;
+import com.ogoodo.wx.db.dao.URoleExample;
+import com.ogoodo.wx.db.mapper.URoleMapper;
+
 
 @Service("mybatisService")
 public class MybatisServiceImpl implements MybatisService{

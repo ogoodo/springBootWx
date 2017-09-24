@@ -190,7 +190,7 @@ public class ShiroControllerTest {
 //        this.logout();
 	}
 
-	 @Test
+	// @Test
 	public void logout() throws Exception {
 		String url = "/test/shiro/logout.do";
 		RequestBuilder request = MockMvcRequestBuilders

@@ -1,6 +1,8 @@
 package com.ogoodo.wx.shiro.config;
 
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,10 +19,19 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+//import com.ogoodo.wx.db.dao.UUser;
+//import com.ogoodo.wx.db.dao.UUserExample;
+//import com.ogoodo.wx.db.mapper.UUserMapper;
+
 
 public class MyRealm extends AuthorizingRealm {
 
  	private final static Logger logger = LoggerFactory.getLogger(MyRealm.class);
+ 	
+// 	@Autowired
+// 	UUserMapper usermapper;
     /**
      * 为当前登录的Subject授予角色和权限
      * 经测试:本例中该方法的调用时机为需授权资源被访问时
@@ -85,6 +96,12 @@ public class MyRealm extends AuthorizingRealm {
         logger.info("正在验证身份...");
 	    	UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
 	    String username= token.getUsername();
+	    
+//	    UUserExample example = new UUserExample();
+//	    UUserExample.Criteria criteria = example.createCriteria();
+//		criteria.andEmailEqualTo(username); 	 
+//		UUser user = usermapper.selectByPrimaryKey((long)1);
+////		List<UUser> user = usermapper.selectByExample(example);
 	    if(!username.equals("admin") && !username.equals("user") && !username.equals("test")) {
 	        logger.info("----->用户:" + username + "没有登录权限");
 	    		return null;

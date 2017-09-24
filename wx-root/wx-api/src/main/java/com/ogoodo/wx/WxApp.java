@@ -1,4 +1,4 @@
-package com.ogoodo.wx.test.api.main;
+package com.ogoodo.wx;
 
 
 import java.util.ArrayList;
@@ -19,26 +19,26 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 
-////@MapperScan("com.ogoodo.wx.test.mybatis.mapper")
-////@MapperScan("com.ogoodo.wx.test.mybatis.dao")
-////@ComponentScan({"com.ogoodo.wx.*"})
-////@EntityScan("com.ogoodo.wx.*")
-////@EnableJpaRepositories("com.delivery.repository")
-//
-//@SpringBootApplication
-////@MapperScan("com.ogoodo.wx.test.dao.mapper")
-//@MapperScan("com.ogoodo.wx.db.mapper")
-//@ComponentScan(basePackages={
-//		"com.ogoodo.wx"//,
-////		"com.ogoodo.wx.test.api.controller",
-////		"com.ogoodo.wx.shiro",
-////		"com.ogoodo.wx.shiro.test.controller",
-////		"com.ogoodo.wx.test.api.main",
-////		"com.ogoodo.wx.test.service",
-////		"com.ogoodo.wx.test.dao"
-//	}) // 会自动扫描这个package下的注解
-////@Configuration
-public class App // extends WebMvcConfigurerAdapter// extends WebMvcConfigurerAdapter
+//@MapperScan("com.ogoodo.wx.test.mybatis.mapper")
+//@MapperScan("com.ogoodo.wx.test.mybatis.dao")
+//@ComponentScan({"com.ogoodo.wx.*"})
+//@EntityScan("com.ogoodo.wx.*")
+//@EnableJpaRepositories("com.delivery.repository")
+
+@SpringBootApplication
+//@MapperScan("com.ogoodo.wx.test.dao.mapper")
+@MapperScan("com.ogoodo.wx.db.mapper")
+@ComponentScan(basePackages={
+		"com.ogoodo.wx",
+//		"com.ogoodo.wx.test.api.controller",
+//		"com.ogoodo.wx.shiro",
+//		"com.ogoodo.wx.shiro.test.controller",
+//		"com.ogoodo.wx.test.api.main",
+//		"com.ogoodo.wx.test.service",
+//		"com.ogoodo.wx.test.dao"
+	}) // 会自动扫描这个package下的注解
+//@Configuration
+public class WxApp // extends WebMvcConfigurerAdapter// extends WebMvcConfigurerAdapter
 {
 //	@Override
 //	   public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
@@ -46,8 +46,8 @@ public class App // extends WebMvcConfigurerAdapter// extends WebMvcConfigurerAd
 //	    }
 	
 	public static void main(String[] args) {
-		System.out.println("系统启动成功");
-		SpringApplication.run(App.class, args);
+		System.out.println("WX系统启动成功");
+		SpringApplication.run(WxApp.class, args);
 	}
 	
 //    /**

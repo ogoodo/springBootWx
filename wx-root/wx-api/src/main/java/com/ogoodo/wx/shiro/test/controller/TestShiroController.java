@@ -15,25 +15,25 @@ import com.ogoodo.wx.test.dao.pojo.TestEntity;
 @RestController
 public class TestShiroController {
 
-	@Autowired
-	TestEntity entity = new TestEntity();
+//	@Autowired
+//	TestEntity entity = new TestEntity();
 
 	@RequestMapping(value="/test")
 	public Map<String, Object> index() {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		TestEntity entity2 = new TestEntity();
-		entity2.setUssername("chenxb2");
-		entity2.setPassword("1234562");
-		
-
-		entity.setUssername("chenxb");
-		entity.setPassword("123456");
-
-		map.put("code", "10001");
-		map.put("msg", "接口调用成功");
-		map.put("entity", entity);
-		map.put("entity2", entity2);
+//		TestEntity entity2 = new TestEntity();
+//		entity2.setUssername("chenxb2");
+//		entity2.setPassword("1234562");
+//		
+//
+//		entity.setUssername("chenxb");
+//		entity.setPassword("123456");
+//
+//		map.put("code", "10001");
+//		map.put("msg", "接口调用成功");
+//		map.put("entity", entity);
+//		map.put("entity2", entity2);
 		return map;
 	}
 }

@@ -31,6 +31,7 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>com/ogoodo/wx/test/dao/xml/*.xml</include>
+                    <include>com/ogoodo/wx/db/xml/*.xml</include>
                     <!-- <include>**/*.xml</include> -->
                 </includes>
             </resource>
