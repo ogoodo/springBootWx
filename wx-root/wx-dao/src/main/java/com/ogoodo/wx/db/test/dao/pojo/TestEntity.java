@@ -1,4 +1,4 @@
-package com.ogoodo.wx.test.dao.pojo;
+package com.ogoodo.wx.db.test.dao.pojo;
 
 import org.springframework.stereotype.Component;;
 

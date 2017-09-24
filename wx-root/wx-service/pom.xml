@@ -25,7 +25,7 @@
     
         <dependency>
             <groupId>com.ogoodo.wx</groupId>
-            <artifactId>wx-dao</artifactId>
+            <artifactId>wx-db</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <!-- <scope>provided</scope> --><!-- 编译需要而发布不需要的jar包 -->
         </dependency>

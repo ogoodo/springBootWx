@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ogoodo.wx.test.dao.pojo.TestEntity;
+import com.ogoodo.wx.db.test.dao.pojo.TestEntity;
 
 @RestController
 public class TestShiroController {

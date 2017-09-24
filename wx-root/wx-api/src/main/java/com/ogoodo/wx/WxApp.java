@@ -27,7 +27,8 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
 @SpringBootApplication
 //@MapperScan("com.ogoodo.wx.test.dao.mapper")
-@MapperScan("com.ogoodo.wx.db.mapper")
+//@MapperScan({"com.ogoodo.wx.db", "com.ogoodo.wx.test"})
+@MapperScan("com.ogoodo.wx.db")
 @ComponentScan(basePackages={
 		"com.ogoodo.wx",
 //		"com.ogoodo.wx.test.api.controller",
