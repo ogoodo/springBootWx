@@ -53,7 +53,12 @@
         <!-- <scope>provided</scope> --><!-- 编译需要而发布不需要的jar包 -->
     </dependency>
 
-    
+
+
+    <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-devtools</artifactId>
+    </dependency>
   </dependencies>
   
   
@@ -94,7 +99,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.ogoodo.wx.test.api.main.App</mainClass>
+          <mainClass>com.ogoodo.wx.api.WxApp</mainClass>
         </configuration>
         <executions>
            <execution>

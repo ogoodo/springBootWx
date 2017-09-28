@@ -2,6 +2,7 @@ package com.ogoodo.wx.shiro.config;
 
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 import javax.servlet.DispatcherType;
@@ -161,8 +163,8 @@ public class ShiroConfigMy {
         myRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         // myRealm.setAuthenticationTokenClass(UserAuthenticationToken.class);
         return myRealm;  
-    }  
-  
+    }
+    
     @Bean  
     public URLPermissionsFilter urlPermissionsFilter() {  
         return new URLPermissionsFilter();  
@@ -186,7 +188,7 @@ public class ShiroConfigMy {
     /**
      * cookie对象;
      */
-    @Bean
+    @Bean(name = "rememberMeCookie")
     public SimpleCookie rememberMeCookie() {
 //        log.info("rememberMeCookie()");
         // 这个参数是cookie的名称，对应前端的checkbox 的name = rememberMe
@@ -219,8 +221,24 @@ public class ShiroConfigMy {
 //        return authorizationAttributeSourceAdvisor;
 //    }
 
-    @Bean  
+    @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {  
         return new LifecycleBeanPostProcessor();  
     }  
+
+    // 不知道做什么用
+    @Bean
+    public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
+        daap.setProxyTargetClass(true);
+        return daap;
+    }
+    
+    // 不知道做什么用
+    @Bean
+    public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor aasa = new AuthorizationAttributeSourceAdvisor();
+        aasa.setSecurityManager(securityManager);
+        return aasa;
+    }
 } 

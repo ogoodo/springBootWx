@@ -132,8 +132,8 @@
     <groupId>io.springfox</groupId>
     <artifactId>springfox-swagger-ui</artifactId>
     <version>2.6.1</version>
-</dependency>	
-		
+</dependency>
+
 	</dependencies>
 
 <!-- 	<build>

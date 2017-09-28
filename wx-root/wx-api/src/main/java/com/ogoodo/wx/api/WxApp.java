@@ -1,4 +1,4 @@
-package com.ogoodo.wx;
+package com.ogoodo.wx.api;
 
 
 import java.util.ArrayList;
