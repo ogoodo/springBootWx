@@ -19,7 +19,7 @@ cd cd ~/github/springBootWx/wx-root/
 wx-root >   mvn clean package --D maven.test.skip=true    // 打包前测试
 wx-root >   mvn clean package                             // 直接打包
 运行jar包
-wx-root >   java -jar ./wx-api/target/wx.jar --server.port=8011 --spring.profiles.active=prod
+wx-root >   java -jar ./wx-api/target/wx.jar --server.port=8011 --spring.profiles.active=prod --logging.level=DEBUG
 
 
 tool_____________________________________________

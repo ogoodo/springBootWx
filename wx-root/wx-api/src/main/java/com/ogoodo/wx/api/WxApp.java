@@ -47,7 +47,7 @@ public class WxApp // extends WebMvcConfigurerAdapter// extends WebMvcConfigurer
 //	    }
 	
 	public static void main(String[] args) {
-		System.out.println("WX系统启动成功");
+		System.out.println("WX系统开始启动");
 		SpringApplication.run(WxApp.class, args);
 	}
 	
