@@ -5,4 +5,6 @@ import com.ogoodo.wx.db.auto.dao.UUser;
 public interface UserService {
 
     int insert(UUser record);
+    
+    String GetPasswordByUsername(String username);
 }

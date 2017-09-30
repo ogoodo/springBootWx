@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.db.auto.dao.UUserExample;
 import com.ogoodo.wx.db.auto.mapper.UUserMapper;
+import com.ogoodo.wx.service.UserService;
 
 
 public class MyRealm extends AuthorizingRealm {
@@ -31,7 +33,8 @@ public class MyRealm extends AuthorizingRealm {
  	private final static Logger logger = LoggerFactory.getLogger(MyRealm.class);
  	
  	@Autowired
- 	UUserMapper usermapper;
+ 	UserService userService;
+// 	UUserMapper usermapper;
     /**
      * 为当前登录的Subject授予角色和权限
      * 经测试:本例中该方法的调用时机为需授权资源被访问时
@@ -96,48 +99,82 @@ public class MyRealm extends AuthorizingRealm {
         logger.info("正在验证身份...");
 	    UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
 	    String username= token.getUsername();
-
-	    UUserExample example = new UUserExample();
-	    UUserExample.Criteria criteria = example.createCriteria();
-		criteria.andEmailEqualTo(username);
-//		UUser user = usermapper.selectByPrimaryKey((long)1);
-		// 如果这个地方提示类找不到， 很有可能是wx-db里xml没有打包到jar里去
-//		List<UUser> user = usermapper.selectByExample(example);
-	    if(!username.equals("admin") && !username.equals("user") && !username.equals("test")) {
-	        logger.info("----->用户:" + username + "没有登录权限");
+	    String saltPassword = userService.GetPasswordByUsername(username);
+	    if(saltPassword.isEmpty()) {
+	        logger.info("----->用户:" + username + "没有存在");
 	    		return null;
 	    } else {
-	        logger.info("----->用户:" + username + "存在");
+	        logger.info("----->用户:" + username + "存在,ps:" + saltPassword);
 	    }
-	    String userId= (String) authcToken.getPrincipal();
-	    logger.info("----->userId:" + userId);
-	    	//模拟从数据库取得的信息
-	    	String password="123456";
+//	    	String password="123";
 	    	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
 	    	// MD5盐值加密生成复杂密码
 			ByteSource credSalt = ByteSource.Util.bytes(username);
 			// 这个值应该是注册的时候存储到数据库里面
-	    	Object saltPassword = new SimpleHash("MD5", password, credSalt, 1024);
+	    // Object saltPassword = new SimpleHash("MD5", password, credSalt, 1024);
+//	    	String saltPassword1 = new SimpleHash("MD5", password, credSalt, 1024).toString();
+//	        logger.info("----->用户:" + username + "存在,p2:" + saltPassword1);
 	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, saltPassword, credSalt, getName());
-	    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
-
 	    	return info;
+	    	
+//    		// MD5盐值加密生成复杂密码
+//		ByteSource credSalt = ByteSource.Util.bytes(username);
+//		DefaultPasswordService dps = new DefaultPasswordService();
+////		Object ps = dps.encryptPassword(saltPassword);
+////		SimpleHash ps = new SimpleHash("MD5", saltPassword);
+//		SimpleHash ps = new SimpleHash("MD5");
+//		ps.setBytes(saltPassword.getBytes());
+////	    // Object saltPassword = new SimpleHash("MD5", password, credSalt, 1024);
+//	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, ps, credSalt, getName());
+//	    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
+//	
+//	    	return info;
 
-
-//        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
-//        //两个token的引用都是一样的
-//        UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
-//        // log.info("验证当前Subject时获取到token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
-//        //此处无需比对,比对的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息
-//        //说白了就是第一个参数填登录用户名,第二个参数填合法的登录密码(可以是从数据库中取到的,本例中为了演示就硬编码了)
-//        //这样一来,在随后的登录页面上就只有这里指定的用户和密码才能通过验证
-//      /*  if("mike".equals(token.getUsername())){
-//            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("mike", "mike", this.getName());
-//            authcInfo.getCredentials();
-//            this.setSession("currentUser", "mike");
-//            return authcInfo;
-//        }*///没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
-//        return null;
+	    
+	    
+	    
+////	    UUserExample example = new UUserExample();
+////	    UUserExample.Criteria criteria = example.createCriteria();
+////		criteria.andEmailEqualTo(username);
+//////		UUser user = usermapper.selectByPrimaryKey((long)1);
+////		// 如果这个地方提示类找不到， 很有可能是wx-db里xml没有打包到jar里去
+////		List<UUser> user = usermapper.selectByExample(example);
+//	    if(!username.equals("admin") && !username.equals("user") && !username.equals("test")) {
+//	        logger.info("----->用户:" + username + "没有登录权限");
+//	    		return null;
+//	    } else {
+//	        logger.info("----->用户:" + username + "存在");
+//	    }
+//	    String userId= (String) authcToken.getPrincipal();
+//	    logger.info("----->userId:" + userId);
+//	    	//模拟从数据库取得的信息
+//	    	String password="123456";
+//	    	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
+//	    	// MD5盐值加密生成复杂密码
+//			ByteSource credSalt = ByteSource.Util.bytes(username);
+//			// 这个值应该是注册的时候存储到数据库里面
+//	    // Object saltPassword = new SimpleHash("MD5", password, credSalt, 1024);
+//	    	String saltPassword = new SimpleHash("MD5", password, credSalt, 1024).toString();
+//	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, saltPassword, credSalt, getName());
+//	    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
+//
+//	    	return info;
+//
+//
+////        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
+////        //两个token的引用都是一样的
+////        UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
+////        // log.info("验证当前Subject时获取到token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
+////        //此处无需比对,比对的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息
+////        //说白了就是第一个参数填登录用户名,第二个参数填合法的登录密码(可以是从数据库中取到的,本例中为了演示就硬编码了)
+////        //这样一来,在随后的登录页面上就只有这里指定的用户和密码才能通过验证
+////      /*  if("mike".equals(token.getUsername())){
+////            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("mike", "mike", this.getName());
+////            authcInfo.getCredentials();
+////            this.setSession("currentUser", "mike");
+////            return authcInfo;
+////        }*///没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
+////        return null;
     }
 
     /**
