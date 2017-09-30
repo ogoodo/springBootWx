@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ogoodo.wx.db.dao.URole;
-import com.ogoodo.wx.db.dao.URoleExample;
-import com.ogoodo.wx.db.mapper.URoleMapper;
+import com.ogoodo.wx.db.auto.dao.URole;
+import com.ogoodo.wx.db.auto.dao.URoleExample;
+import com.ogoodo.wx.db.auto.mapper.URoleMapper;
 
 
 @Service("mybatisService")

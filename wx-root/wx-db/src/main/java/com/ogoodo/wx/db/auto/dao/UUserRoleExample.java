@@ -1,9 +1,9 @@
-package com.ogoodo.wx.db.dao;
+package com.ogoodo.wx.db.auto.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class URolePermissionExample {
+public class UUserRoleExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class URolePermissionExample {
 
     private Integer offset;
 
-    public URolePermissionExample() {
+    public UUserRoleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -124,6 +124,66 @@ public class URolePermissionExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andUidIsNull() {
+            addCriterion("uid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidIsNotNull() {
+            addCriterion("uid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidEqualTo(Long value) {
+            addCriterion("uid =", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotEqualTo(Long value) {
+            addCriterion("uid <>", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidGreaterThan(Long value) {
+            addCriterion("uid >", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidGreaterThanOrEqualTo(Long value) {
+            addCriterion("uid >=", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLessThan(Long value) {
+            addCriterion("uid <", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidLessThanOrEqualTo(Long value) {
+            addCriterion("uid <=", value, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidIn(List<Long> values) {
+            addCriterion("uid in", values, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotIn(List<Long> values) {
+            addCriterion("uid not in", values, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidBetween(Long value1, Long value2) {
+            addCriterion("uid between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUidNotBetween(Long value1, Long value2) {
+            addCriterion("uid not between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
         public Criteria andRidIsNull() {
             addCriterion("rid is null");
             return (Criteria) this;
@@ -181,66 +241,6 @@ public class URolePermissionExample {
 
         public Criteria andRidNotBetween(Long value1, Long value2) {
             addCriterion("rid not between", value1, value2, "rid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIsNull() {
-            addCriterion("pid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIsNotNull() {
-            addCriterion("pid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidEqualTo(Long value) {
-            addCriterion("pid =", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotEqualTo(Long value) {
-            addCriterion("pid <>", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidGreaterThan(Long value) {
-            addCriterion("pid >", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidGreaterThanOrEqualTo(Long value) {
-            addCriterion("pid >=", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidLessThan(Long value) {
-            addCriterion("pid <", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidLessThanOrEqualTo(Long value) {
-            addCriterion("pid <=", value, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidIn(List<Long> values) {
-            addCriterion("pid in", values, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotIn(List<Long> values) {
-            addCriterion("pid not in", values, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidBetween(Long value1, Long value2) {
-            addCriterion("pid between", value1, value2, "pid");
-            return (Criteria) this;
-        }
-
-        public Criteria andPidNotBetween(Long value1, Long value2) {
-            addCriterion("pid not between", value1, value2, "pid");
             return (Criteria) this;
         }
     }

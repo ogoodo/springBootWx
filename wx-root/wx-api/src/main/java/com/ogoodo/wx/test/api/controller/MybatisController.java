@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
-import com.ogoodo.wx.db.dao.URole;
-import com.ogoodo.wx.db.dao.URoleExample;
+import com.ogoodo.wx.db.auto.dao.URole;
+import com.ogoodo.wx.db.auto.dao.URoleExample;
 import com.ogoodo.wx.test.service.service.MybatisService;
 import com.ogoodo.wx.utils.page.PageTool;
 

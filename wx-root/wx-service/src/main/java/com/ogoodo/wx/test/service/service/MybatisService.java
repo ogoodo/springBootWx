@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.ogoodo.wx.db.dao.URole;
-import com.ogoodo.wx.db.dao.URoleExample;
+import com.ogoodo.wx.db.auto.dao.URole;
+import com.ogoodo.wx.db.auto.dao.URoleExample;
 
 
 

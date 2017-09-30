@@ -1,7 +1,7 @@
-package com.ogoodo.wx.db.mapper;
+package com.ogoodo.wx.db.auto.mapper;
 
-import com.ogoodo.wx.db.dao.URolePermission;
-import com.ogoodo.wx.db.dao.URolePermissionExample;
+import com.ogoodo.wx.db.auto.dao.URolePermission;
+import com.ogoodo.wx.db.auto.dao.URolePermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

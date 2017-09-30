@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ogoodo.wx.shiro.test.controller.User;
-import com.ogoodo.wx.test.api.main.App;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +36,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //@WebAppConfiguration
 //@WebIntegrationTest("server.port:0")// 使用0表示端口号随机，也可以具体指定如8888这样的固定端口
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = App.class)
+@ContextConfiguration(classes = WxApp.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class ShiroTest {
 
@@ -61,15 +60,15 @@ public class ShiroTest {
 //        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
 //    }
 
-//    HttpEntity<String> getContent(String content) {
-//        HttpHeaders headers = new HttpHeaders();
-//        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
-//        headers.setContentType(type);
-//        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
-//
-//        HttpEntity<String> formEntity = new HttpEntity<String>(content, headers);
-//    		return formEntity;
-//    	}
+    HttpEntity<String> getContent(String content) {
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+
+        HttpEntity<String> formEntity = new HttpEntity<String>(content, headers);
+    		return formEntity;
+    	}
     @Test
     public void test4() throws JsonProcessingException{
     		User user = new User();
@@ -77,12 +76,12 @@ public class ShiroTest {
     		user.setPassword("123456");
     		user.setRemember(true);
     		ObjectMapper mapper = new ObjectMapper();
-//        HttpEntity<String> formEntity = this.getContent(mapper.writeValueAsString(user));
-//        String url = "http://localhost:"+port+"/test/shiro/login.do";
-//        String result = restTemplate.postForObject(url, formEntity, String.class);
-//        System.out.println(result);
-//        assertNotNull(result);
-//        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
+        HttpEntity<String> formEntity = this.getContent(mapper.writeValueAsString(user));
+        String url = "http://localhost:"+port+"/test/shiro/login.do";
+        String result = restTemplate.postForObject(url, formEntity, String.class);
+        System.out.println(result);
+        assertNotNull(result);
+        assertThat(result, Matchers.containsString("\"code\":\"10000\""));
     }
 
     @Test

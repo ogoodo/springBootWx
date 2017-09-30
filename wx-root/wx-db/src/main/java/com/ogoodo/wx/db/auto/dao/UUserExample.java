@@ -1,4 +1,4 @@
-package com.ogoodo.wx.db.dao;
+package com.ogoodo.wx.db.auto.dao;
 
 import java.util.ArrayList;
 import java.util.Date;

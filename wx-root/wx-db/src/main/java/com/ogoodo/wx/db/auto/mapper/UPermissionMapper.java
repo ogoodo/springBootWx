@@ -1,7 +1,7 @@
-package com.ogoodo.wx.db.mapper;
+package com.ogoodo.wx.db.auto.mapper;
 
-import com.ogoodo.wx.db.dao.UPermission;
-import com.ogoodo.wx.db.dao.UPermissionExample;
+import com.ogoodo.wx.db.auto.dao.UPermission;
+import com.ogoodo.wx.db.auto.dao.UPermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ogoodo.wx.db.auto.dao.UUser;
+import com.ogoodo.wx.service.UserService;
 import com.ogoodo.wx.shiro.config.MyRealm;
 import com.ogoodo.wx.shiro.config.MyShiroService;
 
@@ -57,6 +59,9 @@ public class ShiroController {
 
 	@Autowired
 	private MyShiroService myShiroService;
+	
+	@Autowired
+	private UserService userService;
 
 
 	@ResponseBody
@@ -112,7 +117,29 @@ public class ShiroController {
        return map;
    }
 
-   
+   @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
+   @ApiImplicitParam(name = "user", value = "用户注册", required = true, dataType = "User")
+   @ApiResponses(value = {  
+	        @ApiResponse(code = 200, message = "成功"),
+	        @ApiResponse(code = 404, message = "接口不存在")  
+		}  
+	)
+  @PostMapping(value = "/test/shiro/regist.do", produces = {"application/json;charset=utf-8"})
+  public Map<String,Object> shiroRegist(
+  		@RequestBody User user, Model model) {
+
+			UUser dbuser = new UUser();
+			dbuser.setEmail(user.getUsername());
+			dbuser.setPswd(user.getPassword());
+			long insertCount = userService.insert(dbuser);
+			Map<String, Object> map = new HashMap<String, Object>();
+	        map.put("code", "10004");
+	        map.put("data", insertCount);
+	        map.put("msg", "注册错误");
+	        return map;
+//	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
+   }
+
    @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
    @ApiResponses(value = {  

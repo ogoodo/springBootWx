@@ -1,14 +1,10 @@
-package com.ogoodo.wx.db.mapper;
+package com.ogoodo.wx.db.auto.mapper;
 
-import com.ogoodo.wx.db.dao.UUser;
-import com.ogoodo.wx.db.dao.UUserExample;
+import com.ogoodo.wx.db.auto.dao.UUser;
+import com.ogoodo.wx.db.auto.dao.UUserExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-
-//@Mapper
 public interface UUserMapper {
     long countByExample(UUserExample example);
 

@@ -21,9 +21,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ogoodo.wx.db.dao.UUser;
-import com.ogoodo.wx.db.dao.UUserExample;
-import com.ogoodo.wx.db.mapper.UUserMapper;
+import com.ogoodo.wx.db.auto.dao.UUser;
+import com.ogoodo.wx.db.auto.dao.UUserExample;
+import com.ogoodo.wx.db.auto.mapper.UUserMapper;
 
 
 public class MyRealm extends AuthorizingRealm {
@@ -94,32 +94,33 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {//获取基于用户名和密码的令牌
 
         logger.info("正在验证身份...");
-	    	UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
+	    UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
 	    String username= token.getUsername();
-	    
+
 	    UUserExample example = new UUserExample();
 	    UUserExample.Criteria criteria = example.createCriteria();
-		criteria.andEmailEqualTo(username); 	 
+		criteria.andEmailEqualTo(username);
 //		UUser user = usermapper.selectByPrimaryKey((long)1);
-		List<UUser> user = usermapper.selectByExample(example);
+		// 如果这个地方提示类找不到， 很有可能是wx-db里xml没有打包到jar里去
+//		List<UUser> user = usermapper.selectByExample(example);
 	    if(!username.equals("admin") && !username.equals("user") && !username.equals("test")) {
 	        logger.info("----->用户:" + username + "没有登录权限");
 	    		return null;
 	    } else {
 	        logger.info("----->用户:" + username + "存在");
 	    }
-	    	String userId= (String) authcToken.getPrincipal();
+	    String userId= (String) authcToken.getPrincipal();
 	    logger.info("----->userId:" + userId);
 	    	//模拟从数据库取得的信息
 	    	String password="123456";
 	    	// password = "fc1709d0a95a6be30bc5926fdb7f22f4";
 	    	// MD5盐值加密生成复杂密码
-	    	Object saltPassword = new SimpleHash("MD5", password, ByteSource.Util.bytes(userId), 1024);
-	
-	    	ByteSource credSalt = ByteSource.Util.bytes(userId);
-	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, saltPassword, credSalt, getName());
+			ByteSource credSalt = ByteSource.Util.bytes(username);
+			// 这个值应该是注册的时候存储到数据库里面
+	    	Object saltPassword = new SimpleHash("MD5", password, credSalt, 1024);
+	    	SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, saltPassword, credSalt, getName());
 	    	// SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userId, password, getName());
-	    	
+
 	    	return info;
 
 
@@ -145,8 +146,9 @@ public class MyRealm extends AuthorizingRealm {
      */
     private void setSession(Object key, Object value){
         Subject currentUser = SecurityUtils.getSubject();
-        if(null != currentUser){
-            Session session = currentUser.getSession();if(null != session){
+        if(null != currentUser) {
+			Session session = currentUser.getSession();
+			if(null != session) {
                 session.setAttribute(key, value);
             }
         }

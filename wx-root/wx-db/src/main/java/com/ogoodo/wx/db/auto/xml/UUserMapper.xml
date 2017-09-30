@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ogoodo.wx.db.mapper.UUserMapper">
-  <resultMap id="BaseResultMap" type="com.ogoodo.wx.db.dao.UUser">
+<mapper namespace="com.ogoodo.wx.db.auto.mapper.UUserMapper">
+  <resultMap id="BaseResultMap" type="com.ogoodo.wx.db.auto.dao.UUser">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, nickname, email, pswd, create_time, last_login_time, status
   </sql>
-  <select id="selectByExample" parameterType="com.ogoodo.wx.db.dao.UUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ogoodo.wx.db.auto.dao.UUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -103,13 +103,13 @@
     delete from u_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ogoodo.wx.db.dao.UUserExample">
+  <delete id="deleteByExample" parameterType="com.ogoodo.wx.db.auto.dao.UUserExample">
     delete from u_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ogoodo.wx.db.dao.UUser">
+  <insert id="insert" parameterType="com.ogoodo.wx.db.auto.dao.UUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -120,7 +120,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ogoodo.wx.db.dao.UUser">
+  <insert id="insertSelective" parameterType="com.ogoodo.wx.db.auto.dao.UUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ogoodo.wx.db.dao.UUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ogoodo.wx.db.auto.dao.UUserExample" resultType="java.lang.Long">
     select count(*) from u_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -214,7 +214,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ogoodo.wx.db.dao.UUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ogoodo.wx.db.auto.dao.UUser">
     update u_user
     <set>
       <if test="nickname != null">
@@ -238,7 +238,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ogoodo.wx.db.dao.UUser">
+  <update id="updateByPrimaryKey" parameterType="com.ogoodo.wx.db.auto.dao.UUser">
     update u_user
     set nickname = #{nickname,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

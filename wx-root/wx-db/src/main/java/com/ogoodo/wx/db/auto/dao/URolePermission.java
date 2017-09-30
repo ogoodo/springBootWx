@@ -1,30 +1,22 @@
-package com.ogoodo.wx.db.dao;
+package com.ogoodo.wx.db.auto.dao;
 
 import java.io.Serializable;
 
 /**
  * @author 
  */
-public class UUserRole implements Serializable {
-    /**
-     * 用户ID
-     */
-    private Long uid;
-
+public class URolePermission implements Serializable {
     /**
      * 角色ID
      */
     private Long rid;
 
+    /**
+     * 权限ID
+     */
+    private Long pid;
+
     private static final long serialVersionUID = 1L;
-
-    public Long getUid() {
-        return uid;
-    }
-
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
 
     public Long getRid() {
         return rid;
@@ -32,6 +24,14 @@ public class UUserRole implements Serializable {
 
     public void setRid(Long rid) {
         this.rid = rid;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 
     @Override
@@ -45,17 +45,17 @@ public class UUserRole implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        UUserRole other = (UUserRole) that;
-        return (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-            && (this.getRid() == null ? other.getRid() == null : this.getRid().equals(other.getRid()));
+        URolePermission other = (URolePermission) that;
+        return (this.getRid() == null ? other.getRid() == null : this.getRid().equals(other.getRid()))
+            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getRid() == null) ? 0 : getRid().hashCode());
+        result = prime * result + ((getPid() == null) ? 0 : getPid().hashCode());
         return result;
     }
 
@@ -65,8 +65,8 @@ public class UUserRole implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", uid=").append(uid);
         sb.append(", rid=").append(rid);
+        sb.append(", pid=").append(pid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

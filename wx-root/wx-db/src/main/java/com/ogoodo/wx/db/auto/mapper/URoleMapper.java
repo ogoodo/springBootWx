@@ -1,13 +1,10 @@
-package com.ogoodo.wx.db.mapper;
+package com.ogoodo.wx.db.auto.mapper;
 
-import com.ogoodo.wx.db.dao.URole;
-import com.ogoodo.wx.db.dao.URoleExample;
+import com.ogoodo.wx.db.auto.dao.URole;
+import com.ogoodo.wx.db.auto.dao.URoleExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-//@Mapper
 public interface URoleMapper {
     long countByExample(URoleExample example);
 

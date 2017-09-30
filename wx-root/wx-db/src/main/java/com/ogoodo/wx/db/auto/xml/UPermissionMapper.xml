@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ogoodo.wx.db.mapper.UUserRoleMapper">
-  <resultMap id="BaseResultMap" type="com.ogoodo.wx.db.dao.UUserRole">
-    <result column="uid" jdbcType="BIGINT" property="uid" />
-    <result column="rid" jdbcType="BIGINT" property="rid" />
+<mapper namespace="com.ogoodo.wx.db.auto.mapper.UPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.ogoodo.wx.db.auto.dao.UPermission">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, rid
+    id, url, name
   </sql>
-  <select id="selectByExample" parameterType="com.ogoodo.wx.db.dao.UUserRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ogoodo.wx.db.auto.dao.UPermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from u_user_role
+    from u_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,49 +89,68 @@
       </if>
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ogoodo.wx.db.dao.UUserRoleExample">
-    delete from u_user_role
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_permission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_permission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ogoodo.wx.db.auto.dao.UPermissionExample">
+    delete from u_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ogoodo.wx.db.dao.UUserRole">
-    insert into u_user_role (uid, rid)
-    values (#{uid,jdbcType=BIGINT}, #{rid,jdbcType=BIGINT})
+  <insert id="insert" parameterType="com.ogoodo.wx.db.auto.dao.UPermission">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into u_permission (url, name)
+    values (#{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ogoodo.wx.db.dao.UUserRole">
-    insert into u_user_role
+  <insert id="insertSelective" parameterType="com.ogoodo.wx.db.auto.dao.UPermission">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into u_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        uid,
+      <if test="url != null">
+        url,
       </if>
-      <if test="rid != null">
-        rid,
+      <if test="name != null">
+        name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=BIGINT},
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
-      <if test="rid != null">
-        #{rid,jdbcType=BIGINT},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ogoodo.wx.db.dao.UUserRoleExample" resultType="java.lang.Long">
-    select count(*) from u_user_role
+  <select id="countByExample" parameterType="com.ogoodo.wx.db.auto.dao.UPermissionExample" resultType="java.lang.Long">
+    select count(*) from u_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update u_user_role
+    update u_permission
     <set>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=BIGINT},
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.rid != null">
-        rid = #{record.rid,jdbcType=BIGINT},
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -138,11 +158,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update u_user_role
-    set uid = #{record.uid,jdbcType=BIGINT},
-      rid = #{record.rid,jdbcType=BIGINT}
+    update u_permission
+    set id = #{record.id,jdbcType=BIGINT},
+      url = #{record.url,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ogoodo.wx.db.auto.dao.UPermission">
+    update u_permission
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ogoodo.wx.db.auto.dao.UPermission">
+    update u_permission
+    set url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

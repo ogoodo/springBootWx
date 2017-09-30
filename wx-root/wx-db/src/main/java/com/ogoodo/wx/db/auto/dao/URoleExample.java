@@ -1,9 +1,9 @@
-package com.ogoodo.wx.db.dao;
+package com.ogoodo.wx.db.auto.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UPermissionExample {
+public class URoleExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class UPermissionExample {
 
     private Integer offset;
 
-    public UPermissionExample() {
+    public URoleExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -184,76 +184,6 @@ public class UPermissionExample {
             return (Criteria) this;
         }
 
-        public Criteria andUrlIsNull() {
-            addCriterion("url is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlIsNotNull() {
-            addCriterion("url is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlEqualTo(String value) {
-            addCriterion("url =", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlNotEqualTo(String value) {
-            addCriterion("url <>", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlGreaterThan(String value) {
-            addCriterion("url >", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("url >=", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlLessThan(String value) {
-            addCriterion("url <", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlLessThanOrEqualTo(String value) {
-            addCriterion("url <=", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlLike(String value) {
-            addCriterion("url like", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlNotLike(String value) {
-            addCriterion("url not like", value, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlIn(List<String> values) {
-            addCriterion("url in", values, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlNotIn(List<String> values) {
-            addCriterion("url not in", values, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlBetween(String value1, String value2) {
-            addCriterion("url between", value1, value2, "url");
-            return (Criteria) this;
-        }
-
-        public Criteria andUrlNotBetween(String value1, String value2) {
-            addCriterion("url not between", value1, value2, "url");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -321,6 +251,76 @@ public class UPermissionExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
     }
