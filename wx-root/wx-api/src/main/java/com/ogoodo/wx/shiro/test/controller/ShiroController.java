@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.service.UserService;
+import com.ogoodo.wx.service.entity.UserQueryEntity;
 import com.ogoodo.wx.shiro.config.MyRealm;
 import com.ogoodo.wx.shiro.config.MyShiroService;
 
@@ -140,6 +141,25 @@ public class ShiroController {
 //	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
    }
 
+   @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
+   @ApiImplicitParam(name = "query", value = "获取用户列表", required = true, dataType = "UserQueryEntity")
+   @ApiResponses(value = {  
+	        @ApiResponse(code = 200, message = "成功"),
+	        @ApiResponse(code = 404, message = "接口不存在")  
+		}  
+	)
+  @PostMapping(value = "/test/shiro/getUserList.do", produces = {"application/json;charset=utf-8"})
+  public Map<String,Object> getUserList(@RequestBody UserQueryEntity query, Model model) {
+
+			Map<String, Object> mapUser = userService.getUserList(query);
+			Map<String, Object> map = new HashMap<String, Object>();
+	        map.put("code", "10000");
+	        map.put("data", mapUser);
+	        map.put("msg", "查询成功");
+	        return map;
+//	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
+   }
+   
    @ApiOperation(value="login api", notes="notes", consumes="application/json;charset=utf-8")
    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
    @ApiResponses(value = {  

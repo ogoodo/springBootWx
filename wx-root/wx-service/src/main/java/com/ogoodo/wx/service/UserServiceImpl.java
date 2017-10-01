@@ -1,7 +1,9 @@
 package com.ogoodo.wx.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.db.auto.dao.UUserExample;
 import com.ogoodo.wx.db.auto.mapper.UUserMapper;
+import com.ogoodo.wx.service.entity.UserQueryEntity;
+import com.ogoodo.wx.utils.page.PageTool;
 
 
 @Service("userService")
@@ -40,6 +44,18 @@ public class UserServiceImpl implements UserService{
 		// 如果这个地方提示类找不到， 很有可能是wx-db里xml没有打包到jar里去
 		List<UUser> user = userDao.selectByExample(example);
 		return user.get(0).getPswd();
+	}
+
+	@Override
+	public Map<String, Object> getUserList(UserQueryEntity query) {
+		UUserExample example = new UUserExample();
+		if(StringUtils.isNotBlank(query.getEmail())){
+			UUserExample.Criteria criteria = example.createCriteria();  
+			String like = "%" + query.getEmail() + "%";
+			criteria.andEmailLike(like); 	 
+		}  
+		Map<String,Object> map = PageTool.select(userDao, example, query.getPageNum(), query.getPageSize(), "请求参数校验成功！@1@");
+		return map;
 	}
 
 	
