@@ -1,9 +1,8 @@
-package com.ogoodo.wx.service;
+package com.ogoodo.wx.service.user;
 
 import java.util.Map;
 
 import com.ogoodo.wx.db.auto.dao.UUser;
-import com.ogoodo.wx.service.entity.UserQueryEntity;
 
 public interface UserService {
 

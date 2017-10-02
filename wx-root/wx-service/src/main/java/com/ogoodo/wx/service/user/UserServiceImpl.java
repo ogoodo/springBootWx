@@ -1,4 +1,4 @@
-package com.ogoodo.wx.service;
+package com.ogoodo.wx.service.user;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.db.auto.dao.UUserExample;
 import com.ogoodo.wx.db.auto.mapper.UUserMapper;
-import com.ogoodo.wx.service.entity.UserQueryEntity;
 import com.ogoodo.wx.utils.page.PageTool;
 
 

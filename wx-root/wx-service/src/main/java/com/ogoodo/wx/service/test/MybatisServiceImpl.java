@@ -1,4 +1,4 @@
-package com.ogoodo.wx.test.service.service;
+package com.ogoodo.wx.service.test;
 
 import java.util.List;
 

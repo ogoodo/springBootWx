@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.db.auto.dao.UUserExample;
 import com.ogoodo.wx.db.auto.mapper.UUserMapper;
-import com.ogoodo.wx.service.UserService;
+import com.ogoodo.wx.service.user.UserService;
 
 
 public class MyRealm extends AuthorizingRealm {

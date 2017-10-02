@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +33,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ogoodo.wx.db.auto.dao.UUser;
-import com.ogoodo.wx.service.UserService;
-import com.ogoodo.wx.service.entity.UserQueryEntity;
+import com.ogoodo.wx.service.user.UserQueryEntity;
+import com.ogoodo.wx.service.user.UserService;
 import com.ogoodo.wx.shiro.config.MyRealm;
 import com.ogoodo.wx.shiro.config.MyShiroService;
+import com.ogoodo.wx.utils.valid.AjaxResult;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -149,14 +152,15 @@ public class ShiroController {
 		}  
 	)
   @PostMapping(value = "/test/shiro/getUserList.do", produces = {"application/json;charset=utf-8"})
-  public Map<String,Object> getUserList(@RequestBody UserQueryEntity query, Model model) {
+  public AjaxResult getUserList(@RequestBody @Validated UserQueryEntity query, Model model) {
 
 			Map<String, Object> mapUser = userService.getUserList(query);
-			Map<String, Object> map = new HashMap<String, Object>();
-	        map.put("code", "10000");
-	        map.put("data", mapUser);
-	        map.put("msg", "查询成功");
-	        return map;
+			return new AjaxResult().success(mapUser);
+//			Map<String, Object> map = new HashMap<String, Object>();
+//	        map.put("code", "10000");
+//	        map.put("data", mapUser);
+//	        map.put("msg", "查询成功");
+//	        return map;
 //	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
    }
    
