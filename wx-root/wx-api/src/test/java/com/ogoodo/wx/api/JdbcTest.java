@@ -10,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ogoodo.wx.shiro.config.MyShiroService;
-import com.ogoodo.wx.test.api.main.App;  
   
 
 @RunWith(SpringJUnit4ClassRunner.class)

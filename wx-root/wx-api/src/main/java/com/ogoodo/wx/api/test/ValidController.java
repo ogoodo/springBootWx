@@ -28,4 +28,5 @@ public class ValidController {
 	  public List<String> hello3() {
 	    throw new ServiceException("自定义服务器错误异常");
 	  }
+	  
 }

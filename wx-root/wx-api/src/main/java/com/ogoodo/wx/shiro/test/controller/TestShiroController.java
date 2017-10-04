@@ -16,13 +16,13 @@ import com.ogoodo.wx.db.test.dao.pojo.TestEntity;
 public class TestShiroController {
 
 //	@Autowired
-//	TestEntity entity = new TestEntity();
+//	ValidatorEntity entity = new ValidatorEntity();
 
 	@RequestMapping(value="/test")
 	public Map<String, Object> index() {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-//		TestEntity entity2 = new TestEntity();
+//		ValidatorEntity entity2 = new ValidatorEntity();
 //		entity2.setUssername("chenxb2");
 //		entity2.setPassword("1234562");
 //		
