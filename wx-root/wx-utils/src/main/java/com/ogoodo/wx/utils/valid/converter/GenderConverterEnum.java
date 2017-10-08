@@ -3,19 +3,19 @@ package com.ogoodo.wx.utils.valid.converter;
 import java.util.HashMap;  
 import java.util.Map;  
   
-public enum Gender implements BaseEnum {  
+public enum GenderConverterEnum implements BaseEnum {  
     MALE(1), FEMALE(2);  
   
     private int value;  
-    private static Map<Integer, Gender> valueMap = new HashMap<>();  
+    private static Map<Integer, GenderConverterEnum> valueMap = new HashMap<>();  
       
     static {  
-        for(Gender gender : Gender.values()) {  
+        for(GenderConverterEnum gender : GenderConverterEnum.values()) {  
             valueMap.put(gender.value, gender);  
         }  
     }  
       
-    Gender(int value) {  
+    GenderConverterEnum(int value) {  
         this.value = value;  
     }  
       
@@ -24,8 +24,8 @@ public enum Gender implements BaseEnum {
         return value;  
     }  
   
-    public static Gender getByValue(int value) {  
-        Gender result = valueMap.get(value);  
+    public static GenderConverterEnum getByValue(int value) {  
+        GenderConverterEnum result = valueMap.get(value);  
         if(result == null) {  
             throw new IllegalArgumentException("No element matches " + value);  
         }  

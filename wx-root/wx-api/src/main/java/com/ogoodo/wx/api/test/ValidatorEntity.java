@@ -2,15 +2,12 @@ package com.ogoodo.wx.api.test;
 
 import java.sql.Timestamp;
 
-import com.ogoodo.wx.utils.valid.converter.FuncEnum;
-import com.ogoodo.wx.utils.valid.converter.Gender;
 import com.ogoodo.wx.utils.valid.formatter.MyPhoneNumberFormat;
 import com.ogoodo.wx.utils.valid.formatter.TimestampFormat;
 import com.ogoodo.wx.utils.valid.formatter.MyPhoneNumberModel;
 import com.ogoodo.wx.utils.valid.validator.FlagValidator;
 import com.ogoodo.wx.utils.valid.validator.MyMin;
 import com.ogoodo.wx.utils.valid.validator.MyMobile;
-import com.ogoodo.wx.utils.valid.validator.MyTel;
 import com.ogoodo.wx.utils.valid.validator.MyTelModel;
 
 public class ValidatorEntity {
@@ -33,9 +30,6 @@ public class ValidatorEntity {
     @MyMin(message="{my.user.min}", min=3)
     private String mymin;
     
-    private Gender gender;
-   
-    private FuncEnum funcEnum;
 
 	@TimestampFormat
     private Timestamp startTime;
@@ -49,14 +43,6 @@ public class ValidatorEntity {
 	public void setPhone(MyPhoneNumberModel phone) {
 		this.phone = phone;
 	}
-	
-    public FuncEnum getFuncEnum() {
-        return funcEnum;
-    }
-
-    public void setFuncEnum(FuncEnum funcEnum) {
-        this.funcEnum = funcEnum;
-    }
 
     public Timestamp getStartTime() {
 		return startTime;
@@ -66,14 +52,6 @@ public class ValidatorEntity {
 		this.startTime = startTime;
 	}
 
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
  
 	public String getPageNum() {
 		return pageNum;

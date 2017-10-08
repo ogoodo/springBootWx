@@ -3,10 +3,10 @@ package com.ogoodo.wx.utils.valid.converter;
 import org.springframework.core.convert.converter.Converter;  
 
 
-public class StringToGenderConverter implements Converter<String, Gender> {  
+public class StringToGenderConverter implements Converter<String, GenderConverterEnum> {  
   
     @Override  
-    public Gender convert(String source) {  
-        return Gender.getByValue(Integer.parseInt(source));  
+    public GenderConverterEnum convert(String source) {  
+        return GenderConverterEnum.getByValue(Integer.parseInt(source));  
     }  
 }  

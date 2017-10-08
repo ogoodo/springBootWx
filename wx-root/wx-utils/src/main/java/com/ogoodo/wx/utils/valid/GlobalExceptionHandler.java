@@ -116,7 +116,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(HttpMessageNotReadableException.class)
   public AjaxResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
     logger.error("参数解析失败", e);
-    return new AjaxResult().failure("could_not_read_json");
+    return new AjaxResult().failure("could_not_read_json:\r\n" + e.getMessage());
   }
 
 //  /**

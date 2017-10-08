@@ -9,23 +9,24 @@ import com.ogoodo.wx.utils.valid.json.LocalDateSerializer;
 
 public class MessageConverterEntity {
 
-    private String name;
-    private int age;
+//    private String name;
+//    private int age;
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate birthDay;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+    
+//	public String getName() {
+//		return name;
+//	}
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//	public int getAge() {
+//		return age;
+//	}
+//	public void setAge(int age) {
+//		this.age = age;
+//	}
 	public LocalDate getBirthDay() {
 		return birthDay;
 	}

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.time.LocalDate;
 
+/**
+ * 参考: http://multifrontgarden.tistory.com/172
+ */
 
 public class CustomObjectMapper extends ObjectMapper {
 	private static final long serialVersionUID = 1L;

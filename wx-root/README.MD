@@ -31,5 +31,7 @@ java -jar mybatis-generator-gui.jar
 
 
 
+todo
+[第三章 EnumUtil根据值获取枚举对象](http://www.cnblogs.com/jian-xiao/p/6036925.html)
 
 
