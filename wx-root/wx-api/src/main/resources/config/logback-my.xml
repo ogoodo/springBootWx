@@ -105,8 +105,9 @@
 				<pattern>dev:${ENCODER_PATTERN}</pattern>
 			</encoder>
 		</appender>
-
-		<logger name="com.ogoodo.wx" level="debug"/>
+<!-- 
+		<logger name="com.ogoodo.wx" level="debug"/> -->
+		<logger name="com.ogoodo.wx" level="trace"/>
 
 		<root level="${loggingLevel}">
 			<appender-ref ref="CONSOLE" />

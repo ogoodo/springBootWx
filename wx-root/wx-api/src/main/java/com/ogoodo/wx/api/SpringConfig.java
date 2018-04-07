@@ -2,8 +2,14 @@ package com.ogoodo.wx.api;
 
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -23,7 +29,37 @@ import com.ogoodo.wx.utils.valid.json.CustomObjectMapper;
 
 
 @Configuration
+//@EnableWebMvc
 public class SpringConfig extends WebMvcConfigurerAdapter{
+
+//	@Override  
+//    public void addViewControllers(ViewControllerRegistry registry) {  
+//        registry.addViewController("/error").setViewName("list.html");  
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);  
+//    }
+
+//	/**
+//	 * 手动配置静态资源路径
+//	 */
+//	@Override
+//    public void configurePathMatch(PathMatchConfigurer configurer) {
+//	  configurer.setUseSuffixPatternMatch(true).setUseTrailingSlashMatch(true);
+//	}
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//    // 映射 /static 的请求到 classpath 下的 static 目录
+//    registry.addResourceHandler("/mystatic/**")
+//                .addResourceLocations("classpath:/mystatic");
+//    }
+	// 本函数使用没问题 2018-04-07
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+////        registry.addResourceHandler("/myResource/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/myResource/");
+////        registry.addResourceHandler("/mystatic/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/mystatic/");
+//        registry.addResourceHandler("/mystatic/**").addResourceLocations("file:/Users/chen/github/springBootWx/wx-root/wx-api/mystatic/");
+//        super.addResourceHandlers(registry);
+//    }
 
     @Bean
     public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter(){

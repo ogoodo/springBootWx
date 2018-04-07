@@ -92,7 +92,7 @@ public class ShiroConfigMy {
 		map.put("/test/shiro/login.do", "anon");
 		map.put("/test/shiro/login2.do", "anon");
 		map.put("/test/shiro/login.jsp", "anon");
-		map.put("/static", "anon");
+//		map.put("/static-html", "anon");
 		// map.put("/test/shiro/logout.do", "logout");
 //		map.put("/test/shiro/user.jsp", "anyRoles[\"user,admin\"]");
 //		map.put("/test/shiro/user.jsp", "roles[admin]");

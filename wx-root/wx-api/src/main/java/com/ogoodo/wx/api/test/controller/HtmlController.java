@@ -8,11 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller 
 public class HtmlController {
 
-    @GetMapping("/static")  
+    @GetMapping("/statichtml")  
     String test(HttpServletRequest request) {  
         //逻辑处理  
         request.setAttribute("key", "hello world");  
         return "index";  
     }
+
+//    @GetMapping("/html-static")  
+//    String test2(HttpServletRequest request) {  
+//        //逻辑处理  
+//        request.setAttribute("key", "hello world");  
+//        return "index";  
+//    }
     
 }
