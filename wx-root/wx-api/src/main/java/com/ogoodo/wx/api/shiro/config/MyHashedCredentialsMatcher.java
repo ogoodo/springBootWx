@@ -3,12 +3,18 @@ package com.ogoodo.wx.api.shiro.config;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MyHashedCredentialsMatcher  extends HashedCredentialsMatcher {
-	
+
+ 	private final static Logger logger = LoggerFactory.getLogger(MyHashedCredentialsMatcher.class);
 
 	@Override
 	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
+        Object tokenHashedCredentials = hashProvidedCredentials(token, info);
+        Object accountCredentials = getCredentials(info);
+        logger.info("----->对比密码: 用户输入:" + tokenHashedCredentials + ",存:" + accountCredentials);
 		boolean matches = super.doCredentialsMatch(token, info);
 		return matches;
 	}
