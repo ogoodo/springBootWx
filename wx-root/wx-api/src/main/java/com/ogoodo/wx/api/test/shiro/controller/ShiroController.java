@@ -69,7 +69,7 @@ public class ShiroController {
 
 
 	@ResponseBody
-	@RequestMapping(value="/test/shiro/index")
+	@RequestMapping(value="/wx/api/test/shiro/index")
 	public Map<String,Object> insert(String name, String type, Locale locale){
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code", "10001");
@@ -78,7 +78,7 @@ public class ShiroController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/test/shiro/annotation.do")
+	@RequestMapping(value = "/wx/api/test/shiro/annotation.do")
 	public Map<String,Object> shiroAnnotation(HttpSession session) {
 		session.setAttribute("key", "value123");
 		Object value = myShiroService.testMethod();
@@ -87,18 +87,18 @@ public class ShiroController {
         map.put("msg", "测试通过session传值");
         map.put("sessionValue", value);
         return map;
-//		return "redirect:/test/shiro/list.jsp";
+//		return "redirect:/wx/api/test/shiro/list.jsp";
 	}
 
 
 	/**
-	 * /test/shiro/sessionTransferValue.do?value=我传入的值123
+	 * /wx/api/test/shiro/sessionTransferValue.do?value=我传入的值123
 	 * 测试用session传值给service
 	 * @param session
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/test/shiro/sessionTransferValue.do")
+	@RequestMapping(value = "/wx/api/test/shiro/sessionTransferValue.do")
 	public Map<String,Object> sessionTransferValue(String value, HttpSession session) {
 		session.setAttribute("myKey", value);
 		Object sessionTransferValue = myShiroService.testSessionTransferValue();
@@ -107,11 +107,11 @@ public class ShiroController {
         map.put("msg", "测试通过session传值");
         map.put("sessionTransferValue", sessionTransferValue);
         return map;
-//		return "redirect:/test/shiro/list.jsp";
+//		return "redirect:/wx/api/test/shiro/list.jsp";
 	}
 	
 
-   @GetMapping(value = "/test/shiro/logout.do")
+   @GetMapping(value = "/wx/api/test/shiro/logout.do")
    public Map<String,Object> logout() {
 	   Subject subject = SecurityUtils.getSubject();  
 	   subject.logout(); 
@@ -128,7 +128,7 @@ public class ShiroController {
 	        @ApiResponse(code = 404, message = "接口不存在")  
 		}  
 	)
-  @PostMapping(value = "/test/shiro/regist.do", produces = {"application/json;charset=utf-8"})
+  @PostMapping(value = "/wx/api/test/shiro/regist.do", produces = {"application/json;charset=utf-8"})
   public Map<String,Object> shiroRegist(
   		@RequestBody User user, Model model) {
 
@@ -151,7 +151,7 @@ public class ShiroController {
 	        @ApiResponse(code = 404, message = "接口不存在")  
 		}  
 	)
-  @PostMapping(value = "/test/shiro/getUserList.do", produces = {"application/json;charset=utf-8"})
+  @PostMapping(value = "/wx/api/test/shiro/getUserList.do", produces = {"application/json;charset=utf-8"})
   public AjaxResult getUserList(@RequestBody @Validated UserQueryEntity query, Model model) {
 
 			Map<String, Object> mapUser = userService.getUserList(query);
@@ -173,7 +173,7 @@ public class ShiroController {
 	        @ApiResponse(code = 404, message = "接口不存在")  
 		}  
 	)
-  @PostMapping(value = "/test/shiro/login.do", produces = {"application/json;charset=utf-8"})
+  @PostMapping(value = "/wx/api/test/shiro/login.do", produces = {"application/json;charset=utf-8"})
   public Map<String,Object> shiroLogin(
   		@RequestBody User user, Model model) {
 	   return this.shiroLogin2(user.getUsername(), user.getPassword(), user.isRemember(), model);
@@ -182,8 +182,8 @@ public class ShiroController {
    
     /**
      * http://localhost:8080/HelloSpringMVC/dologin?username=chen&password=123456
-     * /test/shiro/login.do?username=admin&password=123456&remember=false
-     * /test/shiro/login.do?username=user&password=123456&remember=false
+     * /wx/api/test/shiro/login.do?username=admin&password=123456&remember=false
+     * /wx/api/test/shiro/login.do?username=user&password=123456&remember=false
      * 实际的登录代码
      * 如果登录成功，跳转至首页；登录失败，则将失败信息反馈对用户
      *
@@ -204,7 +204,7 @@ password:"123456"
 }
     */
 //	@ResponseBody
-    @RequestMapping(value = "/test/shiro/login2.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/wx/api/test/shiro/login2.do", method= RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     public Map<String,Object> shiroLogin2(
 //    		@RequestBody String username,
 //    		@RequestBody String password,
@@ -280,7 +280,7 @@ password:"123456"
 
 	// 用户未有权限
     	@ResponseBody
-    	@RequestMapping(value="/test/shiro/unauthor.do")
+    	@RequestMapping(value="/wx/api/test/shiro/unauthor.do")
     	public Map<String,Object> unauthor( Locale locale){
     	    Map<String,Object> map=new HashMap<String,Object>();
     	    map.put("code", "10001");
@@ -289,7 +289,7 @@ password:"123456"
     	}
 
 	@ResponseBody
-	@RequestMapping(value="/test/shiro/custom/perms.do")
+	@RequestMapping(value="/wx/api/test/shiro/custom/perms.do")
 	public Map<String,Object> customPerms( Locale locale){
 	    Map<String,Object> map=new HashMap<String,Object>();
 	    map.put("code", "10000");
@@ -299,7 +299,7 @@ password:"123456"
 
 
 	@ResponseBody
-	@RequestMapping(value="/test/shiro/custom/anyPerms.do")
+	@RequestMapping(value="/wx/api/test/shiro/custom/anyPerms.do")
 	public Map<String,Object> customAnyPerms( Locale locale){
 	    Map<String,Object> map=new HashMap<String,Object>();
 	    map.put("code", "10000");
@@ -308,7 +308,7 @@ password:"123456"
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/test/shiro/custom/anyRoles.do")
+	@RequestMapping(value="/wx/api/test/shiro/custom/anyRoles.do")
 	public Map<String,Object> customAnyRoles( Locale locale){
 	    Map<String,Object> map=new HashMap<String,Object>();
 	    map.put("code", "10000");
