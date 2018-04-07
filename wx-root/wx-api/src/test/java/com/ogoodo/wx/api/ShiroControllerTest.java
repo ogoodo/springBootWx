@@ -28,13 +28,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.ogoodo.wx.shiro.config.ShiroConfigMy;
-import com.ogoodo.wx.shiro.test.controller.ShiroController;
+import com.ogoodo.wx.api.shiro.config.ShiroConfigMy;
+import com.ogoodo.wx.api.test.shiro.controller.ShiroController;
 
 public class ShiroControllerTest {
     private MockMvc mvc;
 //    @Autowired
-//    private ShiroConfigMy cfg;// = new com.ogoodo.wx.shiro.config.ShiroConfigMy();
+//    private ShiroConfigMy cfg;// = new com.ogoodo.wx.api.shiro.config.ShiroConfigMy();
     private ShiroConfigMy cfg;
 //    private ShiroConfigMy cfg = new ShiroConfigMy();
 //    @Resource

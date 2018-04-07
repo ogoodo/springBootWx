@@ -1,4 +1,4 @@
-package com.ogoodo.wx.test.api.controller;
+package com.ogoodo.wx.api.test.controller;
 
 import java.util.HashMap;
 import java.util.List;

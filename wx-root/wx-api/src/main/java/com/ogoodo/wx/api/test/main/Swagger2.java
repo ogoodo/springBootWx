@@ -1,4 +1,4 @@
-package com.ogoodo.wx.test.api.main;
+package com.ogoodo.wx.api.test.main;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,8 @@ public class Swagger2 {
 //    				.groupName("test")//创建多个分组
 //                .apiInfo(apiInfo())
 //                .select()
-//                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.test.api.controller"))
-////                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.shiro.test.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.api.test.controller"))
+////                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.api.test.shiro.controller"))
 //                .paths(PathSelectors.any())
 //                .build();
 //    }
@@ -44,7 +44,7 @@ public class Swagger2 {
                 .apiInfo(demoApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx"))
-//                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.shiro.test.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("com.ogoodo.wx.api.test.shiro.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

@@ -1,4 +1,4 @@
-package com.ogoodo.wx.shiro.config;
+package com.ogoodo.wx.api.shiro.config;
 
 import java.io.IOException;  
 

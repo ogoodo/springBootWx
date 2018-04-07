@@ -1,4 +1,4 @@
-package com.ogoodo.wx.shiro.test.controller;
+package com.ogoodo.wx.api.test.shiro.controller;
 
 
 

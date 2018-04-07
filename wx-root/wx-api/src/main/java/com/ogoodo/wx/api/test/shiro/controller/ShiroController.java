@@ -1,4 +1,4 @@
-package com.ogoodo.wx.shiro.test.controller;
+package com.ogoodo.wx.api.test.shiro.controller;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,11 +32,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ogoodo.wx.api.shiro.config.MyRealm;
+import com.ogoodo.wx.api.shiro.config.MyShiroService;
 import com.ogoodo.wx.db.auto.dao.UUser;
 import com.ogoodo.wx.service.user.UserQueryEntity;
 import com.ogoodo.wx.service.user.UserService;
-import com.ogoodo.wx.shiro.config.MyRealm;
-import com.ogoodo.wx.shiro.config.MyShiroService;
 import com.ogoodo.wx.utils.valid.AjaxResult;
 
 import io.swagger.annotations.ApiImplicitParam;

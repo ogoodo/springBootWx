@@ -35,6 +35,7 @@ wx-root >   java -jar ./wx-api/target/wx.jar --server.port=8011 --spring.profile
 
 验证地址_____________________________________________
 
+http://localhost:8011/swagger-ui.html  wagger地址
 http://localhost:8011/test/mybatis/select?userid=13
 
 

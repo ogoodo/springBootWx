@@ -31,10 +31,10 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 @MapperScan("com.ogoodo.wx.db")
 @ComponentScan(basePackages={
 		"com.ogoodo.wx",
-//		"com.ogoodo.wx.test.api.controller",
+//		"com.ogoodo.wx.api.test.controller",
 //		"com.ogoodo.wx.shiro",
-//		"com.ogoodo.wx.shiro.test.controller",
-//		"com.ogoodo.wx.test.api.main",
+//		"com.ogoodo.wx.api.test.shiro.controller",
+//		"com.ogoodo.wx.api.test.main",
 //		"com.ogoodo.wx.test.service",
 //		"com.ogoodo.wx.test.dao"
 	}) // 会自动扫描这个package下的注解
