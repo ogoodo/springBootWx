@@ -3,14 +3,18 @@ package com.ogoodo.wx.api.test;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.ogoodo.wx.utils.valid.converter.FuncEnum;
 import com.ogoodo.wx.utils.valid.validator.EnumDemo;
 import com.ogoodo.wx.utils.valid.validator.EnumValidator;
 import com.ogoodo.wx.utils.valid.validator.Gender;
 import com.ogoodo.wx.utils.valid.validator.GenderValidator;
+import com.ogoodo.wx.utils.valid.validator.PhoneDemoModel;
 //import com.ogoodo.wx.utils.valid.converter.Gender;
 import com.ogoodo.wx.utils.valid.validator.ValidateEnum;
 import com.ogoodo.wx.utils.valid.validator.ValidateString;
+
+import io.swagger.annotations.ApiModelProperty;
 
 public class ValidatorEnumEntity {
 
@@ -38,9 +42,12 @@ public class ValidatorEnumEntity {
 //  	String code;
  
   	@ValidateString(acceptedValues={"Integer", "String"}, message="Invalid dataType")
+	@JSONField(serialize = false)
+	@ApiModelProperty(example="String", value="Integer,String")
   	String dataType;
   	
   	@ValidateEnum( enumClazz=CountryCode.class, ignoreCase=true, message="请填写正确的枚举类型")
+	@ApiModelProperty(example="US", value="US,GB,CA")
     private String testEnum;
 
     @GenderValidator(message="参数校验不通过:枚举写错了吧")
@@ -48,6 +55,22 @@ public class ValidatorEnumEntity {
 
     @EnumValidator(message="是无效的枚举值！！！")
     EnumDemo enumDemo;
+    
+    public PhoneDemoModel getPhoneModel() {
+		return phoneModel;
+	}
+    
+    public String getPhoneModelStr() {
+		return phoneModel.getAreaCode() + "--" + phoneModel.getPhoneNumber();
+	}
+
+	public void setPhoneModel(PhoneDemoModel phoneModel) {
+		this.phoneModel = phoneModel;
+	}
+
+    // @ModelValidator(message="是无效的枚举值！！！")
+	@JSONField(serialize=false)
+	private PhoneDemoModel phoneModel;
   	
 //  	@ValidateEnum( enumClazz=CountryCode.class, message="This error is coming from the enum class")
 //    @EnumValidator
@@ -69,6 +92,7 @@ public class ValidatorEnumEntity {
 		this.enumDemo = enumDemo;
 	}
 
+	@JSONField(serialize=false)
 	public String getDataType() {
   		return dataType;
   	}
